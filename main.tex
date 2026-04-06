@@ -1,0 +1,364 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsthm, amssymb, amsmath, enumitem, titlesec, mathrsfs}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\A}{\mathscr{A}}
+\newcommand{\Po}{\mathscr{P}}
+\newcommand{\Se}{\mathcal{S}}
+\newcommand{\F}{\mathscr{F}}
+\newcommand{\C}{\mathscr{C}}
+\newcommand{\M}{\mathcal{M}}
+
+\newtheoremstyle{spaced}
+    {20pt}  % Space above
+    {20pt}  % Space below
+    {\normalfont}
+    {}
+    {\bfseries}
+    {.}
+    { }
+    {}
+
+\theoremstyle{spaced}
+
+% Main theorem counter, reset each section
+\newtheorem{theorem}{Theorem}[section]
+
+% Other environments also use the same counter as theorem
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\titlespacing*{\section}
+    {0pt}   % left
+    {3.5ex plus 1ex minus .2ex} % space before
+    {5.0ex plus .2ex}   % space after
+
+\title{Carathéodory Extension Theorem}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Outer Measure}
+
+\begin{definition}
+    (\textbf{Outer measure.}) Let $\Omega$ be a set. Then, $\mu^*: \Po(\Omega) \to [0, \infty]$ is called an \textit{outer measure} on $\Omega$ if:
+    \begin{enumerate}
+        \item $\mu^*(\varnothing) = 0$.
+        \item (\textit{Monotonicity}.) If $A \subseteq B$, then $\mu^*(A) \leq \mu^*(B)$.
+        \item  (\textit{Sub-additivity.}) If $E \subseteq \bigcup_{j \geq 1} E_j$, then $\mu^*(E) \leq \sum_{j \geq 1} \mu^{*}(E_j).$
+    \end{enumerate}    
+\end{definition}
+
+\begin{proposition}
+    Let $\C$ be a collection of subsets of $\Omega$ such that $\varnothing, \Omega \in \C$. Let $\rho: \C \to [0, \infty]$ such that $\rho(\varnothing) = 0$. Define $\mu^*: \Po(\Omega) \to [0, \infty]$ by
+    \begin{equation*}
+    \mu^*(A) := \inf\left\{ \sum_{j\geq 1} \rho(A_j) : A \subseteq \bigcup_{j \geq 1} A_j \text{ and } A_j \in \C \; \forall \; j \geq 1 \right\}.
+    \end{equation*}
+    Then, $\mu^*$ is an outer measure on $\Omega$. 
+\begin{proof}
+    We first note that since $\Omega \in \C$, for any $A \in \Po(\Omega)$, $A \subseteq \Omega$ and so we can set $A_1 = \Omega$ and $A_j = \varnothing$ for all $j \geq 2$. Then, $A \subseteq \bigcup_{j \geq 1}A_j$ and hence $\mu^*$ is well-defined. 
+    
+    We show that it is an outer measure as follows:
+    
+    \begin{enumerate}
+        
+        \item We start by showing that $\mu^*(\varnothing) = 0$. Set $A_j = \varnothing$ for all $j \geq 1$. Then, $\varnothing \subseteq \bigcup_{j \geq 1} A_j$ and so $\mu^*(\varnothing) \leq \sum_{j \geq 1} \rho(A_j) = 0$ since $\rho(\varnothing) = 0$. Further, if $\{A_j\}_{j \geq 1}$ is any covering of $\varnothing$, then $\sum_{j \geq 1} \rho(A_j) \geq 0 \implies \mu^*(\varnothing) \geq 0$. Hence, $\mu^*(\varnothing) = 0$. 
+        
+        \item We now show monotonicity: let $A \subseteq B$. We want to show that $\mu^*(A) \leq \mu^*(B)$. Let $\{ B_j\}_{j \geq1} $ be a covering of $B$. Then, $B \subseteq \bigcup_{j \geq 1} B_j$, but since $A \subseteq B$, we have that $A \subseteq \bigcup_{j \geq 1} B_j$, that is, $\{ B_j \}_{j \geq 1}$ is also a covering of $A$. Thus, every covering of $B$ is a covering of $A$, which implies that $\mu^*(A)$ is the infimum taken over a set which contains the set over which the infimum is taken for $\mu^*(B)$. Hence, $\mu^*(A) \leq \mu^*(B)$.
+        
+        \item Finally, we show sub-additivity: if $A \subseteq \bigcup_{j \geq 1} A_j$, then $\mu^*(A) \leq \sum_{j \geq 1} \mu^*(A_j)$. We may assume that $\mu^*(A_j) < \infty$ for all $j \geq 1$, for if that is not the case then the assertion is trivial. 
+        
+        By definition of $\mu^*$, for all $\varepsilon > 0 $, there exists some covering $\{E_{j, k}\}_{k \geq 1}$ of $A_j$ in $\C$ such that
+        
+        \[ \mu^*(A_j) \leq \sum_{k \geq 1} \rho(E_{j, k}) \leq \mu^*(A_j) + \frac{\varepsilon}{2^j}. \]
+
+        Now, $A \subseteq \bigcup_{j \geq 1} A_j \subseteq \bigcup_{j, k \geq 1} E_{j, k}$, and therefore,
+        \[ \mu^*(A) \leq \sum_{j, k \geq 1} \rho(E_{j, k}) \leq \sum_{j \geq 1} \left( \mu^*(A_j) + \frac{\varepsilon}{2^j} \right) = \sum_{j \geq 1} \mu^*(A_j) + \varepsilon .\]
+
+        Since this is true for all $\varepsilon > 0$, we obtain $\mu^*(A) \leq \sum_{j \geq 1} \mu^*(A_j)$, as required. 
+    \end{enumerate}
+    Hence, $\mu^*$ is an outer measure on $\Omega$. 
+\end{proof}
+\end{proposition}
+
+\section{$\mu^*$-measurable}
+
+\begin{definition}
+        Let $\mu^*$ be an outer measure on $\Omega$. Then, $A \subseteq \Omega$ is said to be \textit{$\mu^*$-measurable} or \textit{Carathéodory-measurable} if
+        \[ \mu^*(E) = \mu^*(E \cap A) + \mu^*(E \cap A^c) \]
+        for all $E \subseteq \Omega$.    
+\end{definition}
+
+\begin{theorem} (\textbf{Carathéodory's Extension Theorem.})
+        Let $\mu^*$ be an outer measure on $\Omega$ and let $\M$ be the collection of all $\mu^*$-measurable sets. Then:        
+        \begin{enumerate}
+            \item $\M$ is a $\sigma$-algebra.
+            \item The restriction of $\mu^*$ on $\M$, $\mu^*|_{\M}$, is a complete measure.
+        \end{enumerate}
+        
+\begin{proof}    
+    \begin{enumerate}
+        \item We first show that $\M$ is a $\sigma$-algebra. 
+        
+        Note that for any $E \subseteq \Omega$, $E \subseteq (E \cap A) \cup (E \cap A^c)$ and therefore \\ $\mu^*(E) \leq \mu^*(E \cap A) + \mu^*(E \cap A^c)$ due to the sub-additivity of $\mu^*$. Hence, to show that $A \in \M$, it suffices to show that $\mu^*(E) \geq \mu^*(E \cap A) + \mu^*(E \cap A^c)$. Since this is trivial if $\mu^*(E) = \infty$, we consider the case where $\mu^*(E) < \infty$.
+
+        \begin{enumerate}
+            
+            \item Since $\mu^*(E \cap \varnothing) + \mu^*(E \cap \varnothing^c) = \mu^*(\varnothing) + \mu^*(E) = 0 + \mu^*(E) = \mu^*(E)$ for all $E \subseteq\Omega$, $\varnothing \in \M$.
+    
+            \item $\M$ is closed under complements since the definition of $\mu^*$ -measurable sets is symmetric about complements: if $A \in \M$, then for all $E \subseteq \Omega$, 
+            \begin{align*}
+                \mu^*(E) &= \mu^*(E \cap A) + \mu^*(E \cap A^c) \\
+                &= \mu^*(E \cap A^c) + \mu^*(E \cap A) \\
+                &= \mu^*(E \cap A^c) + \mu^*(E \cap (A^c)^c)                 
+            \end{align*}
+            and therefore $A^c \in \M$.
+
+            \item It remains to show that $\M$ is closed under countable unions. If $A_j \in \M$ for all $j \geq 1$, we want to show that $\bigcup_{j \geq 1} A_j \in \M$. 
+            
+            \vspace{1em}
+            
+            In order to show this, we first prove closure under finite unions. Let $A, B \in \M$. We want to show that $A\cup B \in \M$, that is,
+                \[ \mu^*(E) \geq \mu^*(E \cap(A \cup B)) + \mu^*(E \cap (A \cup B)^c)\]
+            for all $E \subseteq \Omega$. 
+            Since $A \in \M$, 
+            \begin{equation*}
+                \mu^*(E) \geq \mu^*(E \cap A) + \mu^*(E \cap A^c).
+            \end{equation*} 
+            Further, since $B \in \M$, 
+            \begin{equation*}
+                \mu^*(E \cap A^c) \geq \mu^*(E \cap A^c \cap B) + \mu^*(E \cap A^c \cap B^c)
+            \end{equation*} 
+            and so,             
+                \[ \mu^*(E) \geq \mu^*(E \cap A) + \mu^*(E \cap A^c \cap B) + \mu^*(E \cap A^c \cap B^c).\]
+            Equivalently,  
+                \begin{equation}
+                    \mu^*(E) \geq \mu^*(E \cap A) + \mu^*(E \cap A^c \cap B) + \mu^*(E \cap (A \cup B)^c).
+                \end{equation}
+            But since $A \cup B = A \cup (B \setminus A) = A \cup (B \cap A^c)$, 
+            \[ E \cap (A \cup B) = E \cap (A \cup (B \cap A^c)) = (E \cap A) \cup (E \cap A^c \cap B). \] 
+            
+            Due to the sub-additivity of $\mu^*$,  
+                \[ \mu^*(E \cap (A \cup B)) \leq \mu^*(E \cap A) + \mu^*(E \cap A^c \cap B). \]
+            
+            Using this in (1) yields $\mu^*(E) \geq \mu^*(E \cap (A \cup B)) + \mu^*(E \cap (A \cup B)^c)$. Since this is true for all $E \subseteq \Omega$, $A \cup B \in \M$. We have thus shown closure under finite unions, implying that $\M$ is an algebra. 
+
+            \vspace{1em}
+
+            We now show closure under countable unions. Let $A = \bigcup_{j \geq 1} A_j$. We want to show: 
+                \[ \mu^*(E) \geq \mu^*\left(E \cap \bigcup_{j \geq 1} A_j \right) + \mu^*\left( E \setminus \bigcup_{j \geq 1} A_j\right).\]
+
+            Due to closure under finite unions, we know:
+                \[ \mu^*(E) \geq \mu^*\left( E \cap \bigcup_{j = 1}^n A_j \right) +  \mu^*\left( E \setminus \bigcup_{j = 1}^{n} A_j\right).\]
+
+            Since $\bigcup_{j=1}^{n} A_j \subseteq\bigcup_{j \geq 1} A_j$, $\mu^*(E \setminus \bigcup_{j=1}^n A_j) \geq \mu^*(E \setminus \bigcup_{j \geq 1} A_j)$. Hence, 
+                \begin{equation}
+                    \mu^*(E) \geq \mu^*\left( E \cap \bigcup_{j = 1}^n A_j \right) +  \mu^*\left( E \setminus \bigcup_{j \geq 1} A_j\right).
+                \end{equation}
+
+            Define $B_1 = A_1$, $B_2 = A_2 \setminus A_1$, and similarly, $B_j = A_j \setminus \bigcup_{k = 1} ^ {j - 1} A_k$. Clearly, $B_j$ are pairwise disjoint and $B_j \in \M$ for all $j \geq 1$ because $\M$ is an algebra and thus is closed under set difference. Further, $\bigsqcup_{j \geq 1} B_j = \bigcup_{j \geq 1} A_j$.
+            
+            \vspace{1em}
+            We now show:
+                \begin{equation}
+                \mu^*\left(E \cap \bigsqcup_{j = 1}^n B_j\right) = \sum_{j = 1}^n \mu^*(E \cap B_j).    
+                \end{equation}                
+
+            We show this by induction. The statement is trivial for $n = 1$. Suppose it is true for $n$. For $n + 1$, since $B_{j + 1} \in \M$, we have:
+                \begin{align*}
+                    \mu^*\left(E \cap \bigsqcup_{j = 1}^{n+1} B_j\right) 
+                    &= \mu^*\left(E \cap \bigsqcup_{j = 1}^{n+1} B_j \cap B_{j + 1}\right) + \mu^*\left(E \cap \bigsqcup_{j = 1}^{n+1} B_j \cap B_{j + 1}^c \right) \\
+                    &= \mu^*(E \cap B_{j + 1}) + \mu^*\left( E \cap \bigsqcup_{j = 1}^{n} B_j\right) \\
+                    &= \mu^*(E \cap B_{j + 1}) + \sum_{j = 1}^n \mu^*(E \cap B_j) \\
+                    &= \sum_{j = 1}^{n+1} \mu^*(E \cap B_j)
+                \end{align*}
+
+            Hence, $\mu^*\left( E \cap \bigcup_{j = 1}^n A_j \right) = \mu^*\left( E \cap \bigsqcup_{j = 1}^n B_j \right) = \sum_{j = 1}^n \mu^*(E \cap B_j)$. Using this in (2),
+                \[ \mu^*(E) \geq \sum_{j = 1}^n \mu^*(E \cap B_j) +  \mu^*\left( E \setminus \bigcup_{j \geq 1} A_j\right) \]
+            This is true for all $n$. Hence, 
+                \begin{align*}
+                    \mu^*(E) &\geq \sum_{j \geq 1} \mu^*(E \cap B_j) + \mu^*\left( E \setminus \bigcup_{j \geq 1} A_j\right) \\
+                    &\geq \mu^*\left( \bigsqcup_{j \geq 1} (E \cap B_j) \right) + \mu^*\left( E \setminus \bigcup_{j \geq 1} A_j\right) \tag*{(by subadditivity)}\\
+                    &= \mu^*\left( E \cap \bigcup_{j \geq 1} A_j \right) + \mu^*\left( E \setminus \bigcup_{j \geq 1} A_j\right)
+                \end{align*}
+            thereby showing that $\bigcup_{j \geq 1} A_j$ is in $\M$. Therefore, $\M$ is a $\sigma$-algebra.
+        \end{enumerate}
+
+        \item We now show that $\mu^*|_{\M}$ is a complete measure.
+
+        We begin by showing that it is a measure. Since $\M$ is a $\sigma$-algebra, $\varnothing \in \M$, and $\mu^*(\varnothing) = 0$. 
+        
+        We further need to show countable additivity. Let $\{ A_j \}_{j \geq 1}$ be a sequence of disjoint sets in $\M$. We want to show that $\mu^*\left( \bigsqcup_{j \geq 1} A_j \right) = \sum_{j \geq 1} \mu^*(A_j)$.
+
+        By substituting $E = \Omega$ in (3), we obtain finite additivity:
+        \begin{equation}
+            \mu^*\left( \bigsqcup_{j = 1}^n A_j \right) = \sum_{j = 1}^{n} \mu^*(A_j).    
+        \end{equation}
+        
+        By sub-additivity,
+        \begin{equation}
+            \mu^* \left(\bigsqcup_{j \geq 1} A_j \right) \leq \sum_{j \geq 1} \mu^* (A_j).
+        \end{equation}
+
+        Also, 
+        \[ \bigsqcup_{j \geq 1} A_j \supseteq \bigsqcup_{j = 1}^n A_j \]
+        and so, by monotonicity, we obtain
+        \[ \mu^*\left( \bigsqcup_{j \geq 1} A_j \right) \geq \mu^* \left( \bigsqcup_{j = 1}^n A_j \right) = \sum_{j = 1}^n \mu^*(A_j) \]
+        where the last equality is obtained from (4). Since this is true for all $n$, for $n \to \infty$, we get
+       \begin{equation}
+       \mu^*\left( \bigsqcup_{j \geq 1} A_j \right) \geq \sum_{j \geq 1} \mu^*(A_j).
+       \end{equation}
+
+       From (5) and (6) we obtain the required equality. Thus, we have shown that $\mu^*|_{\M}$ is a measure. We now show that it is a complete measure. 
+
+       Let $A \subseteq \Omega$ such that $\mu^*(A) = 0$. Then, for any $E \subseteq \Omega$, $E \cap A \subseteq A$ and so by monotonicity, $\mu^*(E \cap A) \leq \mu^*(A) \implies \mu^*(E \cap A) = 0$. Also, $E \supseteq E \cap A^c \implies \mu^*(E) \geq \mu^*(E \cap A^c)$. Thus, 
+       \[ \mu^*(E) \geq \mu^*(E \cap A) + \mu^*(E \cap A^c) \]
+       which implies that $A \in \M$. Therefore, all sets of measure zero are in $\M$, and so $\mu^*|_{\M}$ is a complete measure. 
+    \end{enumerate}
+\end{proof}
+\end{theorem}
+
+\section{Pre-measure}
+
+\begin{definition}
+    (\textbf{Pre-measure.}) Let $\A \subseteq \Po(\Omega)$ be an algebra. Then, $\mu_0: \A \to [0, \infty]$ is said to be a \textit{pre-measure} if:
+    \begin{enumerate}
+        \item $\mu_0(\varnothing) = 0$.
+        \item If $\{ A_j \}_{j \geq 1}$ is a sequence of disjoint sets such that $\bigsqcup_{j \geq 1} A_j \in \A$, then $\mu_0 \left( \bigsqcup_{j \geq 1} A_j \right) = \sum_{j \geq 1} \mu_0(A_j)$.
+    \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    Let $\Omega$ be a set and $\A \subseteq \Po(\Omega)$ be an algebra. Define $\mu^*: \Po(\Omega) \to [0, \infty]$ by
+    \begin{equation*}
+        \mu^*(A) := \inf\left\{ \sum_{j\geq 1} \mu_0(A_j) : A \subseteq \bigcup_{j \geq 1} A_j \text{ and } A_j \in \A \; \forall \; j \geq 1 \right\}
+    \end{equation*}
+    for all $A \in \Po(\Omega)$. Further, let $\M$ be the collection of $\mu^*$-measurable sets. Then, 
+    \begin{enumerate}
+        \item $\mu^*$ restricted to $\A$ is $\mu_0$.
+        \item $\A \subseteq \M$.
+    \end{enumerate}
+
+    \begin{proof}
+        \begin{enumerate}
+            \item Let $A \in \A$. We want to show that $\mu^*(A) = \mu_0(A)$. Set $A_1 = A$ and $A_j = \varnothing$ for all $j \geq 2$. Then, $\sum_{j \geq 1} \mu_0(A_j) = \mu_0(A)$ and so $\mu^*(A) \leq \mu_0(A)$.
+
+            We now show the reverse inequality. Let $\{A_j\}_{j \geq 1}$ be an arbitrary covering of $A$ with $A_j \in \A$ for all $j \geq 1$. Then, $A \subseteq \bigcup_{j \geq 1} A_j$. Define $B_1 = A_1$ and $B_j = A_j \setminus \bigcup_{k=1}^{j-1}A_k$. Then, $B_i \cap B_j = \varnothing$ for all $i \neq j$. Clearly, $B_j \in \A$ as $\A$ is an algebra and therefore is closed under finite unions and set difference. Also, $A \subseteq \bigsqcup_{j \geq 1} B_j = \bigcup_{j \geq 1} A_j$. As $\mu_0$ is a pre-measure, $\mu_0(A) \leq \sum_{j \geq 1} \mu_0(B_j)$. But by definition, $B_j \subseteq A_j$ and therefore $\mu_0(B_j) \leq \mu_0(A_j)$, implying that $\sum_{j \geq 1} \mu_0(B_j) \leq \sum_{j \geq 1} \mu_0(A_j)$. Thus, $\mu_0(A) \leq \sum_{j \geq 1} \mu_0(A_j)$. Since the covering $\{A_j\}_{j \geq 1}$ was arbitrary, $\mu_0(A) \leq \mu^*(A)$. Hence, $\mu^*(A) = \mu_0(A)$.
+
+            \item Let $A \in \A$. We want to show that $A \in \M$, that is, 
+            \begin{equation*}
+                \mu^*(E) \geq \mu^*(E \cap A) + \mu^*(E \cap A^c)
+            \end{equation*}
+            for all $E \subseteq \Omega$. 
+
+            Let $\varepsilon > 0$. There exists a covering $\{E_j\}_{j \geq 1}$ in $\A$ of $E \subseteq \Omega$ such that
+            \begin{equation}
+                \mu^*(E) \leq \sum_{j \geq 1} \mu_0(E_j) \leq \mu^*(E) + \varepsilon.
+            \end{equation}
+            $E \subseteq \bigcup_{j \geq 1} E_j$. Let $F_1 = E_1$ and $F_j = E_j \setminus \bigcup_{k=1}^{j-1}E_k$. Then, $\{F_j\}_{j\geq1}$ is a sequence of disjoint sets with $F_j \in \A$ for all $j \geq 1$, since $\A$ is an algebra and so is closed under finite unions and set difference. Also, $\bigsqcup_{j \geq 1} F_j = \bigcup_{j \geq 1} E_j$ and so $\{F_j\}_{j \geq 1}$ is also a covering of $E$.
+
+            Now, 
+            \begin{equation*}
+                E \cap A \subseteq \left( \bigsqcup_{j \geq 1} F_j \right) \cap A = \bigsqcup_{j \geq 1} (F_j \cap A).
+            \end{equation*}
+            Since $A, F_j \in \A$, $F_j \cap A \in \A$. Further, observe that $\mu^*$ is an outer measure by Proposition 1.2. Using sub-additivity of $\mu^*$ yields
+
+            \begin{equation*}
+                \mu^*(E \cap A) \leq \mu^*\left( \bigsqcup_{j \geq 1} (F_j \cap A) \right) \leq \sum_{j \geq 1} \mu_0(F_j \cap A).
+            \end{equation*}
+
+            Similarly, 
+             \begin{equation*}
+                \mu^*(E \cap A^c) \leq \sum_{j \geq 1} \mu_0(F_j \cap A^c).
+            \end{equation*}
+
+            Therefore,
+            
+            \begin{align*}
+                \mu^*(E \cap A) + \mu^*(E \cap A^c) &\leq \sum_{j \geq 1} \mu_0(F_j \cap A) + \sum_{j \geq 1} \mu_0(F_j \cap A^c) \\
+                &= \sum_{j \geq 1} (\mu_0(F_j \cap A) + \mu_0(F_j \cap A^c))  \\
+                &= \sum_{j \geq 1} \mu_0(F_j).
+            \end{align*}
+
+            Since $F_j \subseteq E_j$, $\mu_0(F_j) \leq \mu_0(E_j)$. Hence, $\sum_{j \geq 1} \mu_0(F_j) \leq \sum_{j \geq 1} \mu_0(E_j)$, which gives
+
+            \begin{equation}
+                \mu^*(E \cap A) + \mu^*(E \cap A^c) \leq \sum_{j \geq 1} \mu_0(E_j).
+            \end{equation}
+
+            (7) and (8) imply
+            \begin{equation*}
+                \mu^*(E \cap A) + \mu^*(E \cap A^c) \leq \mu^*(E) + \varepsilon
+            \end{equation*}
+            but since this is true for all $\varepsilon > 0$, we obtain $ \mu^*(E \cap A) + \mu^*(E \cap A^c) \leq \mu^*(E) $, as required. 
+        \end{enumerate}
+    \end{proof}
+\end{proposition}
+
+\section{Extension of Pre-measure to Measure}
+
+\begin{theorem}
+    Let $\A \subseteq \Po(\Omega)$ be an algebra and let $\mu_0: \A \to [0, \infty]$ be a pre-measure. Define $\mu^*: \Po(\Omega) \to [0, \infty]$ by
+    \begin{equation*}
+        \mu^*(A) := \inf\left\{ \sum_{j\geq 1} \mu_0(A_j) : A \subseteq \bigcup_{j \geq 1} A_j \text{ and } A_j \in \A \; \forall \; j \geq 1 \right\}
+    \end{equation*}
+    for all $A \in \Po(\Omega)$. Further, let $\F(\A)$ be the $\sigma$-algebra generated by $\A$ and $\mu$ be the restriction of $\mu^*$ to $\F(\A)$. Then:
+    \begin{enumerate}
+        \item $\mu$ is a measure which extends the pre-measure $\mu_0$ to $\F(\A)$.
+        \item Let $\nu$ be any other measure which extends $\mu_0$ to $\F(\A)$. Then, $\nu(E) \leq \mu(E)$ for all $E \in \F(\A)$, and if $\mu(E) < \infty$, then $\nu(E) = \mu(E)$. Further, if $\mu_0$ is $\sigma$-finite, then $\mu$ is the unique extension of $\mu_0$ to $\F(\A)$.
+    \end{enumerate}
+
+    \begin{proof}
+        \begin{enumerate}
+            \item We want to show that $\mu|_{\A} = \mu_0$. Let $\M$ be the collection of $\mu^*$-measurable sets. By Theorem 2.2, $\M$ is a $\sigma$-algebra, and by Proposition 3.2, $\A \subseteq \M$. Therefore, $\F(\A) \subseteq \M$. By Proposition 3.2, we also have that $\mu^*|_{\A} = \mu_0$. Hence, $\mu|_{\A} = \mu_0$. Further, $\mu^*|_{\M}$ is a measure, as we showed in Theorem 2.2. This implies that $\mu^*|_{\M}$ possesses the property of countable additivity, and thus, $\mu^*|_{\F(\A)}$ also possesses it, that is, $\mu$ is a measure. 
+
+            \item We first show that if $\nu$ is any other measure which extends $\mu_0$ to $\F(\A)$, then $\nu(E) \leq \mu(E)$ for all $E \in \F(\A)$. Let $\{E_j\}_{j \geq 1}$ be a covering of $E$ in $\A$. Then, by the sub-additivity of $\nu$, $\nu(E) \leq \sum_{j \geq 1} \nu(E_j)$. But since $\nu$ is an extension of $\mu_0$ and $E_j \in \A$, $\nu(E_j) = \mu_0(E_j)$ and therefore, $\nu(E) \leq \sum_{j \geq 1} \mu_0(E_j)$. This is true for all coverings of $E$ in $\A$ and therefore, $\nu(E) \leq \mu^*(E)$ by definition of $\mu^*$. Now, $E \in \F(\A)$ and $\mu = \mu^*|_{\F(\A)}$ and thus, $\nu(E) \leq \mu(E) = \mu^*(E)$. 
+
+            Let $\mu(E) < \infty$. Suppose $E \subseteq \bigcup_{j \geq 1} E_j$ with $E_j \in \A$ for all $j \geq 1$. As usual, let $\{F_j\}_{j \geq 1}$ be the sequence of disjoint sets in $\A$ such that $\bigsqcup_{j = 1}^n F_j = \bigcup_{j = 1}^n E_j$. Then, 
+            \begin{align*}
+                \nu\left( \bigcup_{j \geq 1} E_j \right) &= \lim_{n \to \infty} \nu \left( \bigcup_{j = 1}^n E_j\right) = \lim_{n \to \infty} \nu \left( \bigsqcup_{j = 1}^n F_j\right) \\
+                &= \lim_{n \to \infty} \sum_{j = 1}^{n} \mu_0(F_j) \\
+                &= \lim_{n \to \infty} \mu \left( \bigsqcup_{j = 1}^n F_j\right) \tag{as $\mu$ is also an extension of $\mu_0$} \\
+                &= \lim_{n \to \infty} \mu \left( \bigcup_{j = 1}^n E_j\right)
+            \end{align*}
+
+            Hence, 
+            \begin{equation}
+                \nu\left( \bigcup_{j \geq 1} E_j \right) = \mu\left( \bigcup_{j \geq 1} E_j \right).
+            \end{equation}            
+            
+            As $\mu$ is a restriction of $\mu^*$ and by the way $\mu^*$ was defined, there exists a covering $\{E_j\}_{j \geq 1}$ of $E$ in $\A$ such that $\mu(E) \leq \sum_{j \geq 1} \mu_0(E_j) \leq \mu(E) + \varepsilon$. Then, $\{F_j\}_{j \geq 1}$ is also a covering of $E$ such that $F_j$ are disjoint and $F_j \in \A$, with $\bigsqcup_{j \geq 1} F_j = \bigcup _{j \geq1} E_j$. Since $F_j \subseteq E_j$, we have that $\mu_0(F_j) \leq \mu_0(E_j)$ and so, 
+                \begin{equation*}
+                    \mu \left( \bigsqcup_{j \geq 1} F_j \right) = \sum_{j \geq1} \mu(F_j) = \sum_{j \geq 1} \mu_0(F_j) \leq \sum_{j \geq 1} \mu_0(E_j) \leq \mu(E) + \varepsilon.
+                \end{equation*}
+            That is, we just showed that for any $E \in \F(\A)$, there exists a covering $\{F_j\}_{j \geq 1}$ in $\A$ such that if $F = \bigsqcup_{j \geq 1} F_j$, then $\mu(F) \leq \mu(E) + \varepsilon$. Also, since $E \subseteq F$, $\mu(F) = \mu(E) + \mu(F \setminus E)$, and so $\mu(F \setminus E) = \mu(F) - \mu(E) \leq \varepsilon$ (here we used the fact that $\mu(E) < \infty$). Now, 
+            \begin{align*}
+                \mu(E) &\leq \mu(\bigcup_{j \geq 1} E_j) = \nu(\bigcup_{j \geq 1} E_j) \tag{from (9)}\\
+                &= \nu(F) \\
+                &= \nu(E) + \nu(F \setminus E) \tag{as $\nu$ is a measure} \\
+                &\leq \nu(E) + \mu(F \setminus E) \\
+                &\leq \nu(E) + \varepsilon.  
+            \end{align*}
+            This is true for all $\varepsilon > 0$ and thus $\mu(E) \leq \nu(E)$. Combining this with the fact that $\nu(E) \leq \mu(E)$ yields the equality $\nu(E) = \mu(E)$ if $\mu(E) < \infty$.
+
+            Finally, suppose that $\mu_0$ is $\sigma$-finite. That is, $\Omega = \bigcup_{j \geq 1} E_j$ with $E_j \in \A$ and $\mu_0(E_j) < \infty$ for all $j \geq 1$. Then, for $F_1 = E_1$ and $F_j = E_j \setminus \bigcup_{k = 1}^{j - 1} E_k$ for $j \geq 2$, $\Omega = \bigsqcup_{j \geq 1} F_j$, where $F_j$ are disjoint and belong to $\A$ . Also, note that since $F_j \subseteq E_j$, $\mu_0(F_j) < \infty$. Then, if $\nu$ is any other extension of $\mu_0$ to $\F(\A)$, for any $A \in \F(\A)$,
+            \begin{equation*}
+                \nu(A) = \nu\left( A \cap \Omega\right) = \nu\left( A \cap \bigsqcup_{j \geq 1} F_j\right) = \sum_{j \ge 1} \nu(A \cap F_j) 
+            \end{equation*}
+            and since $A \cap F_j \subseteq F_j$, $\mu(A \cap F_j) < \infty$, implying that $\nu(A \cap F_j) = \mu(A \cap F_j)$, and thus,
+            \begin{equation*}
+                \sum_{j \ge 1} \nu(A \cap F_j) = \sum_{j \ge 1} \mu(A \cap F_j) =  \mu\left( A \cap \bigsqcup_{j \geq 1} F_j\right) = \mu(A).
+            \end{equation*}
+            Therefore, $\nu(A) = \mu(A)$, showing that $\mu$ is indeed the unique extension of $\mu_0$ to $\F(\A)$.
+        \end{enumerate}
+    \end{proof}
+\end{theorem}
+
+\end{document}
