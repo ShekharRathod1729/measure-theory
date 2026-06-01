@@ -1,0 +1,59 @@
+\documentclass[12pt]{extarticle}
+
+\usepackage[
+    left=1in,
+    right=1in,
+    top=0.9in,
+    bottom=1in
+]{geometry}
+
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsfonts, amsthm, amssymb, mathrsfs, amsmath}
+\usepackage{microtype, xcolor}
+
+\newcommand{\F}{\mathscr{F}}
+
+\renewcommand{\qedsymbol}{\textbf{QED}}
+
+\title{Linearity of the Integral over Nonnegative Simple Functions}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\textcolor{blue}{Let $(\Omega, \F, \mu)$ be a measure space and $f, g$ be nonnegative simple functions on $\Omega$. Then, $I(f + g) = I(f) + I(g)$ and $I(kf) = kI(f)$ for $k \geq 0$.
+}
+
+\begin{proof}
+
+We first show that $I(f + g) = I(f) + I(g)$. Let $f = \sum_{j = 1}^{n} c_j \chi_{E_j}$ and $g = \sum_{k = 1}^{m} d_k \chi_{F_k}$, where $\{E_j\}_{j = 1}^{n}$ and $\{F_k\}_{k = 1}^{m}$ are partitions of $\Omega$. Then, 
+
+$$ f + g = \sum_{j=1}^{n} c_j \chi_{E_j} + \sum_{k=1}^{m} d_k \chi_{F_k}.$$
+For any $1 \leq j \leq n$, we have $E_j = \bigsqcup_{k = 1}^{m} E_j \cap F_k$ and so $\chi_{E_j} = \sum_{k=1}^{m}\chi_{E_j \cap F_k}$. Similarly, for any $1 \leq k \leq m$, $\chi_{F_k} = \sum_{j=1}^{n}\chi_{E_j \cap F_k}$. Hence,
+
+\begin{align*}
+    f + g &= \sum_{j = 1}^{n} c_j\sum_{k=1}^{m}\chi_{E_j \cap F_k} + \sum_{k = 1}^{m} d_k \sum_{j = 1}^{n} \chi_{E_j \cap F_k} \\
+    &= \sum_{j = 1}^{n}\sum_{k=1}^{m} (c_j + d_k) \chi_{E_j \cap F_k}
+\end{align*}
+which is a simple function, and thus, 
+
+\begin{align*}
+    I(f + g) &= \sum_{j = 1}^{n}\sum_{k=1}^{m} (c_j + d_k) \mu(E_j \cap F_k) \\
+    &= \sum_{j = 1}^{n}\sum_{k=1}^{m} c_j \mu(E_j \cap F_k) + \sum_{k = 1}^{m}\sum_{j=1}^{n} d_k \mu(E_j \cap F_k) \\
+    &= \sum_{j=1}^{n}c_j \sum_{k=1}^{m}\mu(E_j \cap F_k) + \sum_{k=1}^{m} d_k \sum_{j=1}^{n} \mu(E_j \cap F_k).
+\end{align*}
+We now use the additivity of $\mu$ to obtain $\sum_{k = 1}^m \mu(E_j \cap F_k) = \mu(\bigsqcup_{k=1}^m E_j \cap F_k) = \mu(E_j)$ and similarly, $\sum_{j=1}^{n} \mu(E_j \cap F_k) = \mu(F_k)$. Hence, 
+
+\begin{align*}
+    I(f + g) = \sum_{j = 1}^n c_j \mu(E_j) + \sum_{k = 1}^{m} d_k \mu(F_k) = I(f) + I(g)
+\end{align*}
+as desired.
+
+Further, $kf = \sum_{j = 1}^{n} kc_j \chi_{E_j}$, which is a nonnegative simple function, since $k \geq 0$. Thus, $I(kf) = \sum_{j = 1}^n kc_j \mu(E_j) = k \sum_{j = 1}^n c_j\mu(E_j) = kI(f).$
+
+\end{proof}
+
+
+\end{document}

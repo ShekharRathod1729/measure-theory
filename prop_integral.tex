@@ -1,0 +1,192 @@
+\documentclass[12pt]{extarticle}
+
+\usepackage[
+    left=1in,
+    right=1in,
+    top=0.9in,
+    bottom=1in
+]{geometry}
+
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsfonts, amsthm, amssymb, mathrsfs, amsmath}
+\usepackage{microtype, xcolor, fontspec}
+
+
+\renewcommand{\qedsymbol}{\textbf{QED}}
+
+\newcommand{\F}{\mathscr{F}}
+\newcommand{\R}{\overline{\mathbb{R}}}
+\newcommand{\sub}{\subseteq}
+
+
+\title{Properties of the Integral}
+\author{Shekhar Rathod}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\textcolor{red}{
+In the discussion that follows:
+\begin{itemize}
+    \item Let $(\Omega, \F, \mu)$ be a measure space.
+    \item The notation $I(f)$ and $\int f d\mu$ is used interchangeably. 
+\end{itemize}}
+
+\textcolor{blue}{1. Let $f, g$ be nonnegative integrable functions on $\Omega$ such that $g \leq f$. Then, $I(g) \leq I(f)$.
+}
+
+\begin{proof}
+Let $f_n \uparrow f$ and $g_n \uparrow g$, where $f_n$ and $g_n$ are monotonically increasing sequences of simple functions. Define $h_n = \min\{f_n, g_n\}$. We first show that $h_n$ is monotonically increasing, i.e., $h_n \leq h_{n + 1}$ for all $n \in \mathbb{N}$. 
+
+Suppose $h_n = f_n$, i.e., $f_n \leq g_n$. If $h_{n + 1} = f_{n + 1}$, then $h_n \leq h_{n + 1}$ since $f_n$ is monotonically increasing. On the other hand, if $h_{n + 1} = g_{n + 1}$, then $g_{n + 1} \geq g_n \geq f_n = h_n$. Similarly, if $h_n = g_n$, then also $h_{n} \leq h_{n + 1}$, and so $h_n$ is monotonically increasing.
+
+Since $g \leq f$, for a large enough $n$, $g_n \leq f_n$. Hence, $\lim_{n \to \infty} h_n = \lim_{n \to \infty} g_n = g$ and so $h_n \uparrow g$. Also, by the way $h_n$ is defined, $h_n \leq f_n$ for all $n \in \mathbb{N}$, and so $I(h_n) \leq I(f_n)$, since $h_n$ and $f_n$ are simple functions. Therefore, $I(g) = \lim_{n \to \infty} I(h_n) \leq \lim_{n \to \infty} I(f_n) = I(f)$.
+\end{proof}
+
+\textcolor{blue}{2. Let $f: \Omega \to \R$ be an integrable function and $A \in \F$. Then, $\chi_Af$ is also integrable, and we denote $I(\chi_Af)$ as $\int_A f d\mu.$}
+
+\begin{proof}
+    Since $f^+ = \max\{0, f\}$ and since $\chi_A \in \{0, 1\}$ , $(\chi_Af)^+ = \chi_A f^+ \leq f^+$. By Property 1, $I((\chi_Af)^+) \leq I(f^+)< \infty$ as $f$ is integrable. Hence, $(\chi_Af)^+$ is integrable. Also, $f^- = \max\{0, - f\}$ and so, $(\chi_Af)^- = \chi_A f^- \leq f^-$. Once again applying Property 1, we get $I((\chi_Af)^-) \leq I(f^-) < \infty$, and thus, $(\chi_Af)^-$ is also integrable. Therefore, $\chi_Af$ is integrable.
+\end{proof}
+
+\textcolor{blue}{3. Let $f, g: \Omega \to \R$ be nonnegative integrable functions. Then, $I(f + g) = I(f) + I(g)$ and $I(cf) = cI(f)$ for $c \geq 0$.}
+
+\begin{proof}    
+    Let $f_n \uparrow f$ and $g_n \uparrow g$, where $f_n, g_n$ are sequences of monotonically increasing, nonnegative simple functions. Then, $f_n + g_n \uparrow f + g$ and $f_n + g_n$ is a simple function for all $n \in \mathbb{N}$. Hence, $I(f + g) = \lim_{n \to \infty} I(f_n + g_n) = \lim_{n \to \infty} (I(f_n) + I(g_n))$, by the linearity of the integral over simple functions. Therefore, $I(f + g) = \lim_{n \to \infty} I(f_n) + \lim_{n \to \infty}  I(g_n) = I(f) + I(g)$.
+    
+    Also, $f_n \uparrow f$ implies that $cf_n \uparrow cf$ and since $cf_n$ is also a monotonically increasing sequence of nonnegative simple functions (for $c \geq 0$), $I(cf) = \lim_{n \to \infty} I(cf_n) = \lim_{n \to \infty} cI(f_n) = cI(f)$, as desired. 
+\end{proof}
+
+\textcolor{blue}{4. Let $A, B \in \F$ be disjoint and $f: \Omega \to \R$ be integrable. Then, $\int_{A \cup B} f d\mu = \int_A f d\mu + \int_B f d\mu$.}
+
+\begin{proof}
+    We first show that if $f$ is integrable over $A$ and $B$, then it is also integrable over $A \cup B$. That is, $\chi_A f$ and $\chi_B f$ are integrable, and we want to show that $\chi_{A \cup B} f$ is also integrable.
+    
+    $(\chi_{A \cup B} f)^+ = \chi_{A \cup B} f^+ = (\chi_A + \chi_B)f^+ = \chi_Af^+ + \chi_B f^+$. By Property 3, $I((\chi_{A \cup B} f)^+) = I(\chi_Af^+) + I(\chi_Bf^+)$, and since $f$ is integrable over $A$ and $B$, $I(\chi_A f^+)$ and $I(\chi_B f^+)$ are both finite, and thus their sum is finite. Hence, $I((\chi_{A \cup B} f)^+)$ is finite. Similarly, $I((\chi_{A \cup B}f)^-)$ is also finite, and therefore $\chi_{A \cup B}f$ is integrable. 
+    
+    $\int_{A \cup B} f d\mu = \int \chi_{A \cup B} f d\mu$ and since $A$ and $B$ are disjoint, 
+    \begin{align*}
+        \int\chi_{A \cup B} f d\mu &= \int (\chi_{A \cup B} f)^+ d\mu - \int (\chi_{A \cup B} f)^-d\mu\\
+        &= \int \chi_Af^+ d\mu + \int\chi_Bf^+ d\mu - \int \chi_A f^- d\mu - \int\chi_Bf^-d\mu \tag{by Property 3}\\
+        &=  \left( \int\chi_Af^+ d\mu - \int\chi_Af^- d\mu \right) + \left( \int\chi_Bf^+ d\mu - \int\chi_Bf^- d\mu \right) \\
+        &= \int_A f d\mu + \int_B fd\mu.
+    \end{align*} 
+\end{proof}
+
+\textcolor{blue}{5. If $f:\Omega \to \R$ is integrable, then $|f| < \infty$ a.e.}
+\begin{proof}
+    $f$ is integrable. We want to show that $|f| < \infty$ a.e., that is, if $E \in \F$ is such that $|f(x)| = \infty$ for all $x \in E$, then $\mu(E) = 0$.
+    
+    Since $|f| = f^+ + f^-$, by Property 3 we have that $I(|f|) = I(f^+) + I(f^-)$, and since $I(f^+), I(f^-) < \infty$ as $f$ is integrable, $I(|f|)$ is also finite and therefore $|f|$ is integrable.
+
+    We first note that 
+    \begin{equation*}
+        \int_{\{|f(x)| \geq n\}} |f| d\mu \leq \int|f| d\mu < \infty
+    \end{equation*}
+    and also that $$\int_{\{|f(x)| \geq n\}} n d\mu \leq \int_{\{|f(x)| \geq n\}} |f| d\mu.$$ Hence, $$n \mu(\{|f(x)| \geq n\}) \leq \int_{\{|f(x)| \geq n\}} |f| d\mu,$$ i.e., $$\mu(\{|f(x)| \geq n\}) \leq \frac{1}{n}\int_{\{|f(x)| \geq n\}} |f| d\mu.$$
+
+    Now, define $A_n := \{x: |f(x)| \geq n\}$. Since $f$ is integrable, $A_n \in \F$. Clearly, $A_{n + 1} \subseteq A_{n}$. Define $A := \bigcap_{n \geq 1} A_n$. Then, $A \in \F$. Define $E := \{ x : |f(x)| = \infty\}$. We now show that $E = A$. 
+    
+    Let $x \in A$. Then, $x \in A_n$ and therefore $|f(x)| \geq n$ for all $n \in \mathbb{Z}$. Hence, $|f(x)| = \infty$ and so $x \in E$. Thus, $A \sub E$. Now suppose $x \in E$. Then, $|f(x)| = \infty$ and so $|f(x)| \geq n$ for all $n \in \mathbb{N}$, implying that $x \in A$. Thus, $E \sub A$ and therefore $A = E$.
+
+    Since $\mu(A_1)$ is finite, we can apply continuity from above to obtain
+    \begin{equation*}
+        \mu(E) = \lim_{n \to \infty} \mu(A_n) \leq \lim_{n \to \infty} \frac{1}{n} \int_{A_n} |f| d\mu \leq \lim_{n \to \infty} \frac{1}{n} \int|f|d\mu = 0
+    \end{equation*}
+    as desired.    
+\end{proof}
+
+\textcolor{blue}{6. If $f, g: \Omega \to \R$ are nonnegative and integrable, then $\int(f - g) d\mu = \int fd\mu - \int g d\mu$.}
+\begin{proof}
+    Define $h:= f - g$. We assume that $h$ is well-defined, that is, $f$ and $g$ are not $+\infty$ simultaneously. Then, $h = h^+ - h^- = f - g$. If $h$ is finite, then $h^+ + g = h^- + f$. If $h = +\infty$, then $f = +\infty$, $g$ is finite, $h^+ = +\infty$, and $h^-$ is finite. Therefore, $h^+ + g = +\infty = h^- + f$. Similarly, $h^+ + g = h^- + f$ holds even when $h = -\infty$. Hence, $\int(h^+ + g) d\mu = \int(h^- + f) d\mu$. Applying Property 3 gives $\int h^+ d\mu + \int g d\mu = \int h^- d\mu + \int f d\mu$, i.e., $\int h^+ d\mu - \int h^- d\mu = \int fd\mu - \int g d\mu$, and since $\int h d\mu = \int h^+ d\mu - \int h^- d\mu$, we have the desired result.
+\end{proof}
+
+\textcolor{blue}{7. If $f, g: \Omega \to \R$ are integrable, then $f + g$ is also integrable and $\int (f + g) d\mu = \int fd\mu + \int gd\mu$.}
+\begin{proof}
+    We first show that $f + g$ is integrable. $(f + g)^+ \leq f^+ + g^+$ and therefore, by Properties 1 and 3, $I((f + g)^+) \leq I(f^+) + I(g^+)< \infty$ since $I(f^+), I(f^+) < \infty$, as $f, g$ are integrable. Similarly, $I((f + g)^-) < \infty$ and so $f + g$ is integrable.
+
+    Now, $f + g = (f^+ - f^-) + (g^+ - g^-) = (f^+ + g^+) - (f^- + g^-)$. By Property 5,
+    \begin{align*}
+        \int(f + g) d\mu &= \int (f^+ + g^+)d\mu - \int(f^- + g^-)d\mu \\
+        &= \left( \int f^+ d\mu + \int g^+ d\mu \right) - \left( \int f^- d\mu + \int g^- d\mu \right) \tag{by Property 3}\\
+        &= \left( \int f^+ d \mu - \int f^- d \mu\right) + \left( \int g^+ d \mu - \int g^- d \mu\right) \\
+        &= \int fd\mu + \int gd\mu.
+    \end{align*}
+\end{proof}
+
+\textcolor{blue}{8. If $f: \Omega \to \R$ is integrable, then $|\int fd\mu| \leq \int|f| d\mu$.}
+\begin{proof}
+    We have,
+    \begin{align*}
+    \left|\int f d\mu\right| &= \left|\int f^+ d\mu - \int f^-d\mu\right| \\
+    &\leq \int f^+ d\mu + \int f^-d\mu \\
+    &= \int(f^+ + f^-) d\mu = \int |f| d\mu.
+    \end{align*}    
+\end{proof}
+
+\textcolor{blue}{9. Let $f: \Omega \to \R$ be integrable and $c \in \mathbb{R}$. Then, $cf$ is integrable and $\int cf d\mu = c\int fd\mu$.}
+\begin{proof}
+    $\int |cf| d\mu = \int |c||f| d\mu = |c| \int |f| d\mu $, where the last equality is true by Property 3. $\int |f| d\mu = \int (f^+ + f^-) d\mu = \int f^+ d\mu + \int f^- d\mu < \infty$ as $f$ is integrable, and so $\int |cf| d\mu < \infty$. Since $\int (cf)^+ d\mu$ and $\int (cf)^- d\mu$ are both bounded by $\int |cf| d\mu$, they are also finite and hence $cf$ is integrable.
+
+    If $c = 0$, the statement is trivial. 
+
+    If $c > 0$, 
+    \begin{align*}
+        \int cf d\mu &= \int(cf)^+  d\mu - \int (cf)^- d\mu \\
+        &= \int cf^+ d\mu - \int cf^- d\mu \\
+        &= c \left( \int f^+ d\mu - \int f^- d\mu \right) \\
+        &= c \int f d\mu.
+    \end{align*}
+
+    Further, if $c < 0$, 
+    \begin{align*}
+        \int cf d\mu &= \int(cf)^+  d\mu - \int (cf)^- d\mu \\
+        &= \int (-c) f^- d\mu - \int (-c)f^+ d\mu \\
+        &= c \int f d\mu.
+    \end{align*} 
+\end{proof}
+
+\textcolor{blue}{10. If $f \geq 0$, then $\int f d\mu \geq 0$.}
+\begin{proof}
+    \begin{align*}
+        \int f d\mu &= \int f^+ d\mu - \int f^- d\mu \\
+        &= \int f^+ d\mu - 0 \geq 0.
+    \end{align*}
+\end{proof}
+
+\textcolor{blue}{11. If $f \geq g$, then $\int f d\mu \geq \int g d\mu$.}
+\begin{proof}
+    Since $f \geq g$, $f-g \geq 0$. By Property 10, $\int (f - g) d\mu \geq 0$, and by linearity, $\int f d\mu - \int gd\mu \geq 0$, i.e., $\int f d\mu \geq \int g d\mu$.
+\end{proof}
+
+\textcolor{blue}{12. If $f \geq 0$ and $\int f d\mu = 0$, then $f = 0$ a.e.}
+\begin{proof}
+    Define $E_n := \{ x: f(x) \geq \frac{1}{n} \}$. Let $E = \bigcup _{n \geq 1} E_n$ and $F = \{ x: f(x) > 0\}$. We first show that $E = F$. Let $x \in E$. Then, for some $n \geq 1$, $x \in E_n$, i.e., $f(x) \geq \frac{1}{n}$, and since $n \in \mathbb{N}$, $f(x) > 0$. Hence, $x \in F$ and $E \sub F$. Also, if $x \in F$, then $f(x) > 0$, and so there exists $n \in \mathbb{N}$ such that $f(x) \geq \frac{1}{n}$, i.e., $x \in E_n$. Therefore, $F \sub E$, showing that $E = F$. Further, $E_n \sub E_{n + 1}$ and so $E_n \uparrow E$. 
+
+    Now, 
+    \begin{align*}
+        \int_{E_n} \frac{1}{n} d\mu \leq \int_{E_n} f d\mu &\leq \int f d\mu = 0
+    \end{align*}
+    and so $\int_{E_n} \frac{1}{n} d \mu = 0$. Hence, $\frac{1}{n} \int \chi_{E_n} d\mu = 0$, i.e., $\mu(E_n) = 0$, for all $n \in \mathbb{N}$. By the subadditivity of $\mu$, $\mu(E) \leq \sum_{n \geq 1} \mu(E_n) = 0 $. Since $E^c = \{ x: f(x) = 0\}$ (as $f \geq 0$),  and since $\mu(E) = 0$, $f = 0$ a.e.
+\end{proof}
+
+\textcolor{blue}{13. If $f = g$ a.e., then $\int f d\mu = \int g d\mu$.}
+\begin{proof}
+    $f = g$ a.e., i.e., $f(x) = g(x)$ for all $x \in E$ and $\mu(E^c) = 0$. $\int f d\mu = \int (\chi_E + \chi_{E^c}) f d\mu = \int \chi_E f d\mu + \int \chi_{E^c} f d\mu$. Since $\mu(E^c) = 0$, $\int \chi_{E^c} f d\mu = 0$, and so $\int fd\mu = \int \chi_E f d\mu = \int \chi_E g d\mu$, as $f = g$ over $E$. Also, $\int \chi_{E^c} g d\mu = 0$ and so $\int \chi_E g d\mu = \int \chi_E g d\mu + \int \chi_{E^c} g d\mu = \int g d\mu$. Therefore, $\int f d\mu = \int gd\mu$.
+\end{proof}
+
+\textcolor{blue}{14. Let $h: \Omega \to \R$ be measurable and $|h| \leq f$, where $f$ is integrable. Then, $h$ is integrable.}
+\begin{proof}
+    Since $|h| \leq f$, $h^+ + h^- \leq f$. By Property 11, $I(h^+ + h^-) \leq I(f)$, and by Property 3, $I(h^+) + I(h^-) \leq I(f)$. Thus, $I(h^+), I (h^-) \leq I(f)$, and since $f$ is integrable, $I(f)$ is finite. Therefore, both $I(h^+)$ and $I(h^-)$ are finite, and so $h$ is integrable.
+\end{proof}
+
+\textcolor{blue}{15. Let $f:\Omega \to \R$  be a measurable function which is bounded on $E$, where $\mu(E) < \infty$, and $f = 0$ on $E^c$. Then, $f$ is integrable.}
+\begin{proof}
+    We want to show that $I(f^+)$ and $I(f^-)$ are finite, but since both of them are bounded by $I(|f|)$, it suffices to show that $I(|f|)$ is finite.
+
+    Since $f$ is bounded on $E$, $|f| < c$ for some $c \in \mathbb{R}$. Hence, $\int_E |f| d\mu \leq \int_E c d\mu = \int \chi_{E} c d\mu = c \mu(E) < \infty$, since $\chi_{E}c$ is a simple function. Further, $\int_{E^c} |f| d \mu = 0$, and so $\int |f| d\mu = \int_E |f| d\mu + \int_{E^c} |f|d\mu < \infty$, as required.
+\end{proof}
+
+\end{document}
