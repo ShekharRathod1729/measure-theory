@@ -1,0 +1,106 @@
+\documentclass[12pt]{extarticle}
+
+\usepackage[
+    left=1in,
+    right=1in,
+    top=0.9in,
+    bottom=1in
+]{geometry}
+
+\usepackage{amsfonts, amsthm, amssymb, mathrsfs, amsmath, enumitem}
+\usepackage{microtype, xcolor, fontspec}
+
+
+\renewcommand{\qedsymbol}{\textbf{QED}}
+
+\newcommand{\F}{\mathscr{F}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Po}{\mathscr{P}}
+\newcommand{\sub}{\subseteq}
+\newcommand{\sm}{\setminus}
+
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{theorem}{Theorem}
+
+
+\title{Introduction --- The Problem of Measure}
+\author{Shekhar Rathod}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\noindent
+Consider the set of all real numbers, $\R$. \textbf{Our goal is to assign a \textit{measure} to every subset of $\R$.} Without defining this term rigorously, we have a certain intuitive notion of how this measure on $\R$ corresponds to length. For instance, it makes sense to say that the measure of the interval $(a, b)$ is $b - a$, and that translating this interval by a certain quantity, say $x$, should not result in a change in its measure; that is, the measure of $(a + x, b + x)$ should remain $b - a$ for all $x \in \R$. We would like to extend this notion from open intervals like $(a, b)$ to all subsets of $\R$. 
+
+
+\textcolor{blue}{
+Our objective, then, is to find a function $\lambda$ that satisfies the following:
+\begin{enumerate}[label=(P\arabic*)]
+    \item To every subset of $\R$, $\lambda$ should assign some nonnegative value, possibly $+\infty$. Hence, it should be a function from $\Po(\R)$ to $[0, +\infty]$, i.e., $\lambda: \Po(\R) \to [0, +\infty]$.    
+    \item $\lambda((a, b)) = b - a$.    
+    \item $\lambda(A + x) = \lambda(A)$, where $A + x := \{ a + x : a \in A \}$.    
+    \item Let $A_1, A_2,...$ be a sequence of pairwise disjoint subsets of $\R$. Then, $\lambda(\bigsqcup_{j \geq 1} A_j) = \sum_{j \geq 1} \lambda(A_j)$.
+\end{enumerate}}
+
+\textbf{We now show that such a function cannot exist.}
+
+%==================================================
+
+\begin{lemma}
+Let $E$ and $F$ be subsets of $\R$ such that $E \sub F$. Then, $\lambda(E) \leq \lambda(F)$.
+\end{lemma}
+
+\begin{proof}
+We first show that $\lambda(\varnothing) = 0$. Set $A_j = \varnothing$ for all $j \geq 1$ in (P4). Then, $\lambda(\varnothing) = \sum \left( \bigsqcup_{j \geq 1} \varnothing \right) = \sum_{j \geq 1} \lambda(\varnothing)$, which is possible only if $\lambda(\varnothing) = 0$.
+
+If $E \sub F$, then $F = E \cup (F \sm E)$, and $E$ and $F \sm E$ are disjoint. Setting $A_1 = E$, $A_2 = F \sm E$, and $A_j = \varnothing$ for all $j \geq 3$ in (P4), we get $\lambda(F) = \lambda(E) + \lambda(F \sm E) \geq \lambda(E)$.
+\end{proof}
+
+%==================================================
+
+\begin{theorem}
+    A function $\lambda$ satisfying (P1) to (P4) does not exist.
+\end{theorem}
+
+\begin{proof}
+Suppose, for contradiction, that such a function $\lambda$ does exist.
+
+\textcolor{red}{Define a relation $\sim$ such that $a \sim b$ if and only if $a - b \in \Q$.}
+
+Clearly, $\sim$ is an equivalence relation. Define $[x] := \{ y \in \R : x - y \in \Q \}$. Then, $[x]$ is an equivalence class. Observe that $[x] = \{ x + q : q \in \Q \}$. Hence, there is a bijection $q \mapsto x + q$ from $\Q$ to $[x]$, and so $[x]$ is a countable set.
+
+\textcolor{red}{Let $\Lambda$ be the collection of all equivalence classes. Then, $\Lambda$ is uncountably infinite.} For if $\Lambda$ were to be countably infinite, then, since each equivalence class is also countable, the union of all the equivalence classes would be a countable union of countable sets, which would also be a countable set. However, the union of all equivalence classes is $\R$, since every real number belongs to some equivalence class, and $\R$ is uncountable, which is a contradiction.
+
+By the Axiom of Choice, we can choose one element from each equivalence class. Call the resulting set $\Omega$, and we may assume that $\Omega \sub  (0, 1)$, for we can choose an element from each equivalence class that is in $(0, 1)$. 
+
+\textbf{We first show that $\lambda(\Omega) = 0$.}
+
+\textcolor{red}{Let $q_1, q_2 \in \Q$, $q_1 \neq q_2$. We now show that $(\Omega + q_1) \cap (\Omega + q_2) = \varnothing$.}
+
+Let $x \in (\Omega + q_1) \cap (\Omega + q_2)$. Then, $x \in \Omega + q_1$ and $x \in \Omega + q_2$, that is, $x = \alpha + q_1$ and $x = \beta + q_2$ for some $\alpha, \beta \in \Omega$. Hence, $\alpha + q_1 = \beta + q_2$, or, $\alpha - \beta = q_2 - q_1 \in \Q$. Therefore, $\alpha \sim \beta$, and so $\alpha$ and $\beta$ belong to the same equivalence classes. However, both $\alpha$ and $\beta$ are in $\Omega$, which contains exactly one element from each equivalence class, by construction. This implies that $\alpha = \beta$, and so $q_1 = q_2$, which contradicts that $q_1 \neq q_2$, proving that $(\Omega + q_1) \cap (\Omega + q_2) = \varnothing$. 
+
+\textcolor{red}{Now consider $-1 < q < 1$, $q \in \Q$.} Since $\Omega \sub (0, 1)$, 
+\[ \bigsqcup_{\substack{-1 < q < 1 \\ q \in \Q}}(\Omega + q) \sub (-1, 2), \]
+and by (P4) along with the lemma, 
+\[ \sum_{\substack{-1 < q < 1 \\ q \in \Q} } \lambda(\Omega + q) \leq \lambda((-1, 2)) = 3 .\]
+But by (P3), $\lambda(\Omega + q) = \lambda(\Omega)$, and so
+\[ \sum_{\substack{-1 < q < 1 \\ q \in \Q} } \lambda(\Omega) \leq \lambda((-1, 2)) = 3, \]
+which is only possible if $\lambda(\Omega) = 0$, since there are infinitely many rationals between $-1$ and $1$. Hence, $\lambda(\Omega) = 0$.
+
+\textbf{We now show: }
+\textcolor{red}{
+\[ (0, 1) \sub \bigsqcup_{\substack{-1 < q < 1 \\ q \in \Q}}(\Omega + q). \]}
+
+Suppose $x \in (0, 1)$. Let $x_0 = [x] \cap \Omega$. Then, $x  \sim x_0$, i.e., $x - x_0 = q \in \Q$. Now, $x_0 \in (0, 1)$ (for $x_0 \in \Omega \sub (0, 1))$, and $x \in (0, 1)$, which implies that $q = x - x_0 \in (-1, 1)$. Thus, $x = x_0 + q \in \Omega + q$ for some rational $q$ such that $-1 < q < 1$. Hence, $x \in \bigsqcup_{\substack{-1 < q < 1 \\ q \in \Q}}(\Omega + q)$.
+
+By the lemma, 
+\[ \lambda((0, 1)) \leq \lambda \left( \bigsqcup_{\substack{-1 < q < 1 \\ q \in \Q}}(\Omega + q) \right), \]
+i.e., 
+\[ 1 \leq \sum_{\substack{-1 < q < 1 \\ q \in \Q}} \lambda(\Omega + q), \]
+which is a contradiction, for the sum on the right is $0$. 
+\end{proof}
+
+\end{document}
