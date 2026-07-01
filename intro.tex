@@ -54,7 +54,7 @@ Let $E$ and $F$ be subsets of $\R$ such that $E \sub F$. Then, $\lambda(E) \leq 
 \end{lemma}
 
 \begin{proof}
-We first show that $\lambda(\varnothing) = 0$. Set $A_j = \varnothing$ for all $j \geq 1$ in (P4). Then, $\lambda(\varnothing) = \sum \left( \bigsqcup_{j \geq 1} \varnothing \right) = \sum_{j \geq 1} \lambda(\varnothing)$, which is possible only if $\lambda(\varnothing) = 0$.
+We first show that $\lambda(\varnothing) = 0$. Set $A_j = \varnothing$ for all $j \geq 1$ in (P4). Then, $\lambda(\varnothing) = \lambda \left( \bigsqcup_{j \geq 1} \varnothing \right) = \sum_{j \geq 1} \lambda(\varnothing)$, which is possible only if $\lambda(\varnothing) = 0$.
 
 If $E \sub F$, then $F = E \cup (F \sm E)$, and $E$ and $F \sm E$ are disjoint. Setting $A_1 = E$, $A_2 = F \sm E$, and $A_j = \varnothing$ for all $j \geq 3$ in (P4), we get $\lambda(F) = \lambda(E) + \lambda(F \sm E) \geq \lambda(E)$.
 \end{proof}
