@@ -15,6 +15,8 @@
     \mu^*(A) := \inf\left\{ \sum_{j\geq 1} \rho(A_j) : A \subseteq \bigcup_{j \geq 1} A_j \text{ and } A_j \in \C \; \forall \; j \geq 1 \right\}.
     \end{equation*}
     Then, $\mu^*$ is an outer measure on $\Omega$. 
+\end{proposition}
+
 \begin{proof}
     We first note that since $\Omega \in \C$, for any $A \in \Po(\Omega)$, $A \subseteq \Omega$ and so we can set $A_1 = \Omega$ and $A_j = \varnothing$ for all $j \geq 2$. Then, $A \subseteq \bigcup_{j \geq 1}A_j$ and hence $\mu^*$ is well-defined. 
     
@@ -39,7 +41,6 @@
     \end{enumerate}
     Hence, $\mu^*$ is an outer measure on $\Omega$. 
 \end{proof}
-\end{proposition}
 
 \begin{definition}
         Let $\mu^*$ be an outer measure on $\Omega$. Then, $A \subseteq \Omega$ is said to be \textit{$\mu^*$-measurable} or \textit{Carathéodory-measurable} if
@@ -53,6 +54,7 @@
             \item $\M$ is a $\sigma$-algebra.
             \item The restriction of $\mu^*$ on $\M$, $\mu^*|_{\M}$, is a complete measure.
         \end{enumerate}
+\end{theorem}
         
 \begin{proof}    
     \begin{enumerate}
@@ -174,7 +176,6 @@
        which implies that $A \in \M$. Therefore, all sets of measure zero are in $\M$, and so $\mu^*|_{\M}$ is a complete measure. 
     \end{enumerate}
 \end{proof}
-\end{theorem}
 
 \begin{definition}
     (\textbf{Pre-measure.}) Let $\A \subseteq \Po(\Omega)$ be an algebra. Then, $\mu_0: \A \to [0, \infty]$ is said to be a \textit{pre-measure} if:
@@ -194,6 +195,7 @@
         \item $\mu^*$ restricted to $\A$ is $\mu_0$.
         \item $\A \subseteq \M$.
     \end{enumerate}
+\end{proposition}
 
     \begin{proof}
         \begin{enumerate}
@@ -249,7 +251,6 @@
             but since this is true for all $\varepsilon > 0$, we obtain $ \mu^*(E \cap A) + \mu^*(E \cap A^c) \leq \mu^*(E) $, as required. 
         \end{enumerate}
     \end{proof}
-\end{proposition}
 
 \begin{theorem}
     Let $\A \subseteq \Po(\Omega)$ be an algebra and let $\mu_0: \A \to [0, \infty]$ be a pre-measure. Define $\mu^*: \Po(\Omega) \to [0, \infty]$ by
@@ -261,6 +262,7 @@
         \item $\mu$ is a measure which extends the pre-measure $\mu_0$ to $\F(\A)$.
         \item Let $\nu$ be any other measure which extends $\mu_0$ to $\F(\A)$. Then, $\nu(E) \leq \mu(E)$ for all $E \in \F(\A)$, and if $\mu(E) < \infty$, then $\nu(E) = \mu(E)$. Further, if $\mu_0$ is $\sigma$-finite, then $\mu$ is the unique extension of $\mu_0$ to $\F(\A)$.
     \end{enumerate}
+\end{theorem}
 
     \begin{proof}
         \begin{enumerate}
@@ -306,5 +308,5 @@
             Therefore, $\nu(A) = \mu(A)$, showing that $\mu$ is indeed the unique extension of $\mu_0$ to $\F(\A)$.
         \end{enumerate}
     \end{proof}
-\end{theorem}
+
 

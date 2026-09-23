@@ -1,0 +1,67 @@
+\section{Measure}
+
+Let $\Omega$ be a set. 
+
+\begin{definition}
+  Let $\F \sub \Po(\Omega)$ be a $\sigma$-algebra, and let $\mu : \F \to [0, +\infty]$ be a function such that:
+  
+  (1) $\mu(\varnothing) = 0$
+  
+  (2) (\textbf{Countable additivity} or \textbf{$\sigma$-additivity}.) If $(E_j)_{j \geq 1}$ is a sequence of of pairwise disjoint sets in $\F$, then
+  \[
+  \mu \left( \bigsqcup_{j \geq 1} E_j \right) = \sum_{j \geq 1} \mu(E_j).
+  \]
+
+  Then, $\mu$ is called a \textbf{measure}.
+\end{definition}
+
+Countable additivity implies \textbf{finite additivity}: If $E_1,...,E_n$ is a sequence of pairwise disjoint sets in $\F$, then
+\[
+\mu \left( \bigsqcup_{j = 1}^n E_j \right) = \sum_{j = 1}^n \mu(E_j).
+\]
+
+\begin{proposition}
+  Let $E, F \in \F$ such that $E \sub F$ and let $\mu$ be a measure on $\F$. Then, $\mu(E) \leq \mu(F)$. Further, if $\mu(E) < +\infty$, then $\mu(F \sm E) = \mu(F) - \mu(E)$. 
+\end{proposition}
+\begin{proof}
+  Since $E \sub F$, we have $F = (E) \sqcup (F \sm E)$, and so $\mu(F) = \mu(E) + \mu(F \sm E)$. Since $\mu(F \sm E)$ is nonnegative, $\mu(F) \geq \mu(E)$. 
+
+  Now, let $\mu(E) < +\infty$. Since $\mu(F) = \mu(E) + \mu(F \sm E)$ and $\mu(E) < + \infty$, we can subtract $\mu(E)$ from both sides to obtain $\mu(F \sm E) = \mu(F) - \mu(E)$. 
+\end{proof}
+
+\begin{example}
+  (\textbf{Discrete measure.}) Let $\F \sub \Po(\Omega)$ be a $\sigma$-algebra. Let $x_1, x_2,... \in \Omega$ and $p_1, p_2, ... \geq 0$. For all $A \in \F$, define
+  \[
+  \mu(A) := \sum_{j \geq 1} p_j \mathbf{1}_A(x_j)
+  \]
+  where $\mathbf{1}$ is the indicator function: 
+  \[
+  \mathbf{1}_A(x_j) =
+  \begin{cases}
+    1, \text{ if } x_j \in A \\
+    0, \text{ if } x_j \not\in A 
+  \end{cases}.
+  \]
+  Then, $\mu$ is a measure. 
+\end{example}
+
+\begin{example}
+  Let $\Omega = (0, 1)$ and $\C := \{ (a, b] : 0 \leq a < b < 1 \}$. Define $\mu: \C \to \nonneg$ by
+  \[ 
+  \mu((a, b]) = 
+  \begin{cases}
+  + \infty, \text{ if } a = 0 \\
+  b - a, \text{ if } a > 0
+  \end{cases}.
+  \]
+
+  Then, $\mu$ is finitely additive, but not countably additive. To see this, consider a strictly monotonic decreasing sequence $x_n \to 0$ where $x_1 = \frac{1}{2}$. Then, 
+  \[
+  \bigsqcup_{j \geq 1} (x_{j + 1}, x_j] = \left(0, \frac{1}{2}\right]
+  \]
+  and so $\mu\left(\bigsqcup_{j \geq 1} (x_{j + 1}, x_j]\right) = 0$, but $\sum_{j \geq 1} \mu((x_{j + 1}, x_j]) = \sum_{j \geq 1} (x_j - x_{j + 1}) = (x_1 - x_2) + (x_2 - x_3) + ... = \frac{1}{2}$.
+\end{example}
+
+\begin{definition}
+  Let
+\end{definition}
