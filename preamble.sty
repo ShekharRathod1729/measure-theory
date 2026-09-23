@@ -1,0 +1,90 @@
+
+\ProvidesPackage{preamble}
+
+% Page layout
+\usepackage[
+    left=1in,
+    right=1in,
+    top=0.9in,
+    bottom=1in
+]{geometry}
+
+% Mathematics
+\usepackage{
+    amsfonts,
+    amsthm,
+    amssymb,
+    mathrsfs,
+    amsmath,
+    enumitem
+}
+
+% Typography
+\usepackage{microtype, xcolor, fontspec, etoolbox, titlesec, tcolorbox}
+
+\usepackage[
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+]{hyperref}
+
+\setmainfont{Latin Modern Roman}
+
+% Renewed commands
+\renewcommand{\qedsymbol}{\textbf{QED}}
+\titleformat{\section}
+  {\normalfont\Large\bfseries}
+  {\thesection.}
+  {1em}
+  {}
+
+% Custom commands
+\newcommand{\F}{\mathscr{F}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Po}{\mathscr{P}}
+\newcommand{\sub}{\subseteq}
+\newcommand{\sm}{\setminus}
+\newcommand{\Sa}{\mathscr{S}}
+\newcommand{\A}{\mathscr{A}}
+\newcommand{\C}{\mathscr{C}}
+\newcommand{\M}{\mathscr{M}}
+
+% Main headings: 1, 2, 3, ...
+\setcounter{secnumdepth}{1}
+\pretocmd{\section}{\clearpage}{}{}
+
+\titlespacing*{\section}
+    {0pt}    % Left indentation
+    {0pt}    % Space before heading
+    {4cm}   % Space after heading
+
+% Shared theorem counter, reset at each section
+\newcommand{\boxthm}[1]{%
+    \tcolorboxenvironment{#1}{
+        colback=blue!4,
+        colframe=blue!40,
+        boxrule=0.5pt,
+        arc=2pt,
+        left=6pt,
+        right=6pt,
+        top=6pt,
+        bottom=6pt
+    }%
+}
+
+\boxthm{theorem}
+\boxthm{lemma}
+\boxthm{proposition}
+\boxthm{corollary}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{corollary}[definition]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{example}[definition]{Example}
+\newtheorem{remark}[definition]{Remark}

@@ -1,31 +1,4 @@
-\documentclass[12pt]{extarticle}
-
-\usepackage[
-    left=1in,
-    right=1in,
-    top=0.9in,
-    bottom=1in
-]{geometry}
-
-\usepackage{graphicx} % Required for inserting images
-\usepackage{amsfonts, amsthm, amssymb, mathrsfs, amsmath}
-\usepackage{microtype, xcolor, fontspec}
-
-
-\renewcommand{\qedsymbol}{\textbf{QED}}
-
-\newcommand{\F}{\mathscr{F}}
-\newcommand{\R}{\overline{\mathbb{R}}}
-\newcommand{\sub}{\subseteq}
-
-
-\title{Properties of the Integral}
-\author{Shekhar Rathod}
-\date{}
-
-\begin{document}
-
-\maketitle
+\section{Properties of the Integral}
 
 \textcolor{red}{
 In the discussion that follows:
@@ -189,4 +162,4 @@ Since $g \leq f$, for a large enough $n$, $g_n \leq f_n$. Hence, $\lim_{n \to \i
     Since $f$ is bounded on $E$, $|f| < c$ for some $c \in \mathbb{R}$. Hence, $\int_E |f| d\mu \leq \int_E c d\mu = \int \chi_{E} c d\mu = c \mu(E) < \infty$, since $\chi_{E}c$ is a simple function. Further, $\int_{E^c} |f| d \mu = 0$, and so $\int |f| d\mu = \int_E |f| d\mu + \int_{E^c} |f|d\mu < \infty$, as required.
 \end{proof}
 
-\end{document}
+

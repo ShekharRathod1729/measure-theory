@@ -1,40 +1,7 @@
-\documentclass[12pt]{extarticle}
-
-\usepackage[
-    left=1in,
-    right=1in,
-    top=0.9in,
-    bottom=1in
-]{geometry}
-
-\usepackage{amsfonts, amsthm, amssymb, mathrsfs, amsmath, enumitem}
-\usepackage{microtype, xcolor, fontspec}
-
-
-\renewcommand{\qedsymbol}{\textbf{QED}}
-
-\newcommand{\F}{\mathscr{F}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\Po}{\mathscr{P}}
-\newcommand{\sub}{\subseteq}
-\newcommand{\sm}{\setminus}
-
-\newtheorem*{lemma}{Lemma}
-\newtheorem*{theorem}{Theorem}
-
-
-\title{Introduction --- The Problem of Measure}
-\author{Shekhar Rathod}
-\date{}
-
-\begin{document}
-
-\maketitle
+\section{Introduction -- The Problem of Measure}
 
 \noindent
-Consider the set of all real numbers, $\R$. \textbf{Our goal is to assign a \textit{measure} to every subset of $\R$.} Without defining this term rigorously, we have a certain intuitive notion of how this measure on $\R$ corresponds to length. For instance, it makes sense to say that the measure of the interval $(a, b)$ is $b - a$, and that translating this interval by a certain quantity, say $x$, should not result in a change in its measure; that is, the measure of $(a + x, b + x)$ should remain $b - a$ for all $x \in \R$. We would like to extend this notion from open intervals like $(a, b)$ to all subsets of $\R$. 
-
+Consider the set of all real numbers, $\R$. \textbf{Our goal is to assign a \textit{measure} to every subset of $\R$.} Without defining this term rigorously, we have a certain intuitive notion of how this measure on $\R$ corresponds to length. For instance, it makes sense to say that the measure of the interval $(a, b)$ is $b - a$, and that translating this interval by a certain quantity, say $x$, should not result in a change in its measure; that is, the measure of $(a + x, b + x)$ should remain $b - a$ for all $x \in \R$. We would like to extend this notion from open intervals like $(a, b)$ to all subsets of $\R$. \\
 
 \textcolor{blue}{
 Our objective, then, is to find a function $\lambda$ that satisfies the following:
@@ -102,5 +69,3 @@ i.e.,
 \[ 1 \leq \sum_{\substack{-1 < q < 1 \\ q \in \Q}} \lambda(\Omega + q), \]
 which is a contradiction, for the sum on the right is $0$. 
 \end{proof}
-
-\end{document}

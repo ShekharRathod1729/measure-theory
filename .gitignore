@@ -27,4 +27,4 @@
 *.dvi
 *.ps
 *.pdfsync
-
+.vscode/

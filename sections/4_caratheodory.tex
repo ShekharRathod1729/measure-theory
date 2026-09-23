@@ -1,51 +1,4 @@
-\documentclass{article}
-\usepackage{graphicx} % Required for inserting images
-\usepackage{amsthm, amssymb, amsmath, enumitem, titlesec, mathrsfs}
-
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\A}{\mathscr{A}}
-\newcommand{\Po}{\mathscr{P}}
-\newcommand{\Se}{\mathcal{S}}
-\newcommand{\F}{\mathscr{F}}
-\newcommand{\C}{\mathscr{C}}
-\newcommand{\M}{\mathcal{M}}
-
-\newtheoremstyle{spaced}
-    {20pt}  % Space above
-    {20pt}  % Space below
-    {\normalfont}
-    {}
-    {\bfseries}
-    {.}
-    { }
-    {}
-
-\theoremstyle{spaced}
-
-% Main theorem counter, reset each section
-\newtheorem{theorem}{Theorem}[section]
-
-% Other environments also use the same counter as theorem
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{corollary}[theorem]{Corollary}
-
-\titlespacing*{\section}
-    {0pt}   % left
-    {3.5ex plus 1ex minus .2ex} % space before
-    {5.0ex plus .2ex}   % space after
-
-\title{Carathéodory Extension Theorem}
-\author{Shekhar Rathod}
-\date{}
-
-\begin{document}
-
-\maketitle
-
-\section{Outer Measure}
+\section{Carathéodory Extension Theorem}
 
 \begin{definition}
     (\textbf{Outer measure.}) Let $\Omega$ be a set. Then, $\mu^*: \Po(\Omega) \to [0, \infty]$ is called an \textit{outer measure} on $\Omega$ if:
@@ -87,8 +40,6 @@
     Hence, $\mu^*$ is an outer measure on $\Omega$. 
 \end{proof}
 \end{proposition}
-
-\section{$\mu^*$-measurable}
 
 \begin{definition}
         Let $\mu^*$ be an outer measure on $\Omega$. Then, $A \subseteq \Omega$ is said to be \textit{$\mu^*$-measurable} or \textit{Carathéodory-measurable} if
@@ -225,8 +176,6 @@
 \end{proof}
 \end{theorem}
 
-\section{Pre-measure}
-
 \begin{definition}
     (\textbf{Pre-measure.}) Let $\A \subseteq \Po(\Omega)$ be an algebra. Then, $\mu_0: \A \to [0, \infty]$ is said to be a \textit{pre-measure} if:
     \begin{enumerate}
@@ -302,8 +251,6 @@
     \end{proof}
 \end{proposition}
 
-\section{Extension of Pre-measure to Measure}
-
 \begin{theorem}
     Let $\A \subseteq \Po(\Omega)$ be an algebra and let $\mu_0: \A \to [0, \infty]$ be a pre-measure. Define $\mu^*: \Po(\Omega) \to [0, \infty]$ by
     \begin{equation*}
@@ -361,4 +308,3 @@
     \end{proof}
 \end{theorem}
 
-\end{document}
