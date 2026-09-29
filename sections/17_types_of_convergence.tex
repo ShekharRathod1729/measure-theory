@@ -1,1 +1,67 @@
 \section{Types of Convergence}
+
+Let $(\Omega, \F, \mu)$ be a $\sigma$-finite measure space and let $\F$ be $\mu$-complete. \textbf{Recall:} If $f, g: \Omega \to \bar{\R}$ are functions such that $f$ is $\F$-measurable and $g = f$ a.e., then $g$ is also $\F$-measurable.
+
+\textcolor{blue}{We define a relation $\sim$ as follows: $f \sim g$ if $f = g$ a.e.} Clearly, $\sim$ is an equivalence relation. Let $M$ be the set of all $\F$-measurable functions and $\M := M / \sim$, the collection of equivalence classes induced by $\sim$. \\
+
+\textbf{Outline.} We will study the following types of convergence:
+\begin{enumerate}
+    \item Almost-everywhere convergence
+    \item Almost-everywhere uniform convergence
+    \item Almost uniform convergence
+\end{enumerate}
+
+\subsection{Almost-everywhere convergence}
+
+We first recall the definition of \emph{pointwise convergence}:
+
+\begin{definition}
+    Let $f, f_n: E \to \bar{\R}$ such that for all $x \in E$, $f_n(x) \to f(x)$. Then $(f_n)_{n \geq 1}$ \textbf{converges pointwise} to $f$.
+\end{definition}
+
+\begin{definition}
+    We say \textbf{$f_n$ converges to $f$ almost everywhere} if there exists $E \in \F$ such that $f_n \to f$ pointwise on $E$ and $\mu(E^c) = 0$.
+\end{definition}
+
+\begin{lemma}
+    Let $f_n \to f$ a.e. and $f_n \sim g_n$ for all $n$. Further, let $f \sim g$. Then, $g_n \to g$ a.e.
+\end{lemma}
+
+\begin{proof}
+    Since $f_n \to f$ a.e., there exists $A \in \F$ such that $\mu(A^c) = 0$ and $f_n \to f$ pointwise on $A$. Also, since $f \sim g$, there exists $B \in \F$ such that $\mu(B^c) = 0$ and $f(x) = g(x)$ for all $x \in B$.
+
+    Now, $f_n \sim g_n$ and so, for every $n \geq 1$, there is some $E_n \in \F$ with $\mu(E_n^c) = 0$ and $f_n(x) = g_n(x)$ for all $x \in E_n$. 
+
+    \textcolor{red}{Define $$E := A \cap B \cap \bigcap_{n \geq 1} E_n.$$}
+    Then, 
+    $$E^c = A^c \cup B^c \cup \bigcup_{n \geq 1} E_n^c$$
+    and so,
+    $$\mu(E^c) \leq \mu(A^c) + \mu(B^c) + \sum_{n \geq 1} \mu(E_n^c) = 0,$$
+    i.e., $\mu(E^c) = 0$. Further, since $f_n(x) \to f(x)$ for all $x \in A$ and since $E \sub A$, we have that $f_n(x) \to f(x)$ for all $x \in E$. But for any $x \in E$, $x \in E_n$ for all $n \geq 1$, and so $f_n(x) = g_n(x)$ for all $n \geq 1$. Hence, $g_n(x) \to f(x)$ for all $x \in E$. Lastly we observe that $E \sub B$ and so $f(x) = g(x)$ for all $x \in E$. Thus, $g_n(x) \to g(x)$ for all $x \in E$, and since $\mu(E^c) = 0$, we have $g_n \to g$ a.e.
+\end{proof}
+
+\begin{lemma}
+    If $f_n \to f$ a.e. and $f_n \to g$ a.e., then $f = g$ a.e.
+\end{lemma}
+
+\begin{proof}
+    $f_n \to f$ and so for some $E \in \F$, $\mu(E^c) = 0$ and $f_n \to f$ pointwise on $E$. Similarly, $f_n \to g$ pointwise on some $F \in \F$ with $\mu(F^c) = 0$. Define $H := E \cap F$. For all $x \in H$, $f_n(x) \to f(x)$ and $f_n(x) \to g(x)$. By the uniqueness of the limit of a sequence, we have $f(x) = g(x)$ for all $x \in H$. Also, $\mu(H^c) = \mu(E^c \cup F^c) \leq \mu(E^c) + \mu(F^c) = 0$ and so $\mu(H^c) = 0$. Hence, $f = g$ a.e.
+\end{proof}
+
+\begin{example}
+    Let $\Omega = [0, 1]$, and consider the measure space $(\Omega, \mathscr{L}, \lambda)$, where $\mathscr{L}$ is the Lebesgue $\sigma$-algebra on $\Omega$ and $\lambda$ is the Lebesgue measure. Define $f_n(x) := x^n$. Then, $f_n(x) \to 0$ for all $x \in [0, 1)$ but $f_n(1)$ does not converge to $0$. Hence, $(f_n)_{n \geq 1}$ does not converge pointwise to 0 on $[0, 1]$, but $f_n \to 0$ $\lambda$-a.e.
+\end{example}
+
+\subsection{Almost-everywhere uniform convergence}
+
+We recall the definition of \emph{uniform convergence}:
+
+\begin{definition}
+    Let $f, f_n: E \to \bar{\R}$. We say that \textbf{$f_n$ converges to $f$ uniformly} if $\forall \epsilon > 0$, there exists $n_0 \in \mathbb{N}$ such that for all $n \geq n_0$, $|f_n(x) - f(x)| < \epsilon$ for all $x \in E$; or, equivalently, for all $n \geq n_0$, 
+    $$ \sup_{x \in E} |f_n(x) - f(x)| < \epsilon \quad \forall x \in E .$$
+\end{definition}
+
+\begin{definition}
+    Let $f, f_n: \Omega \to \bar{\R}$. Then, \textbf{$f_n$ converges to $f$ uniformly almost everywhere} if there exists some $E \in \F$ such that $\mu(E^c) = 0$ and $f_n \to f$ uniformly on $E$.
+\end{definition}
+

@@ -62,6 +62,44 @@ Countable additivity implies \textbf{finite additivity}: If $E_1,...,E_n$ is a s
   and so $\mu\left(\bigsqcup_{j \geq 1} (x_{j + 1}, x_j]\right) = 0$, but $\sum_{j \geq 1} \mu((x_{j + 1}, x_j]) = \sum_{j \geq 1} (x_j - x_{j + 1}) = (x_1 - x_2) + (x_2 - x_3) + ... = \frac{1}{2}$.
 \end{example}
 
-\begin{definition}
-  Let
-\end{definition}
+\begin{lemma}
+  Let $\mu$ be a measure on a $\sigma$-algebra $\F$ and $E_n, E \in \F$ for all $n \geq 1$.
+
+  (1) (\textbf{Continuity from below.}) If $E_n \uparrow E$, then $\lim_{n \to \infty} \mu(E_n) = \mu(E)$.
+  
+  (2) (\textbf{Continuity from above.}) If $E_n \downarrow E$ and $\mu(E_{N}) < + \infty$ for some $N \in \mathbb{N}$, then $\lim_{n \to \infty} \mu(E_n) = \mu(E)$.
+\end{lemma}
+
+\begin{proof}
+  (1) We have $E_1 \sub E_2 \sub ... \sub E$ and $\bigcup_{j \geq 1} E_j = E$. \textcolor{red}{Define $F_1 := E_1$ and $F_j := E_j \sm E_{j - 1}$ for $j \geq 2$.} Then, $(F_j)_{j \geq 1}$ is a disjoint sequence of sets. Further, 
+  \[
+  \bigsqcup_{j \geq 1} F_j = \bigcup_{j \geq 1} E_j = E
+  \]
+  and so
+  \[
+  \mu \left( \bigsqcup_{j \geq 1} F_j\right) = \mu(E).
+  \]
+  Since $\mu$ is a measure, 
+  \[
+  \sum_{j \geq 1} \mu(F_j) = \mu(E). \tag{*}
+  \]
+  Observe that $\bigsqcup_{j = 1}^n F_j = F_1 \sqcup F_2 \sqcup ... \sqcup F_n = (E_1) \sqcup (E_2 \sm E_1) \sqcup ... \sqcup (E_n \sm E_{n - 1})= E_n$ and so
+  \[
+  \mu \left(\bigsqcup_{j = 1}^n F_j \right) = \mu(E_n),
+  \]
+  that is, 
+  \[
+  \sum_{j = 1}^n \mu(F_j) = \mu(E_n).
+  \]
+  Taking the limit as $n \to \infty$ on both sides, 
+  \[
+  \sum_{j \geq 1} \mu(F_j) = \lim_{n \to \infty} \mu(E_n).
+  \]
+  Combining this with (*) gives $\lim_{n \to \infty} \mu(E_n) = \mu(E)$, as desired. 
+
+  (2) We have $E_1 \supseteq E_2 \supseteq ... \supseteq E$ and $\bigcap_{j \geq 1} E_j = E$. \textcolor{red}{Define $G_1 := E_{N} \sm E_{N + 1}$, $G_2 := E_{N} \sm E_{N + 2}$, and so on.} 
+  
+  Since $E_n \downarrow E$, we have $E_{N + n} \downarrow E$, and so $(E_N \sm E_{N + n}) \uparrow (E_N \sm E)$, i.e., $G_n \uparrow (E_N \sm E)$. By (1), $\lim_{n \to \infty} \mu(G_n) = \mu(E_N \sm E)$. Since $E \sub E_N$, by Proposition 3.2 we have $\mu(E) \leq \mu(E_N)$. But $\mu(E_N) < +\infty$ and so $\mu(E) < + \infty$. By Proposition 3.2, we get that $\mu(E_N \sm E) = \mu(E_N) - \mu(E)$. Similarly, $\mu(G_n) = \mu(E_N \sm E_{N + n}) = \mu(E_N) - \mu(E_{N + n})$. Hence, 
+  \[ \lim_{n \to \infty} \mu(E_N) - \mu(E_{N + n}) = \mu(E_N) - \mu(E) \]
+  and so $\lim_{n \to \infty} \mu(E_{N + n}) = \mu(E)$, i.e., $\lim_{n \to \infty} \mu(E_n) = \mu(E)$. 
+\end{proof}
