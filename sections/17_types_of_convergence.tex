@@ -65,3 +65,9 @@ We recall the definition of \emph{uniform convergence}:
     Let $f, f_n: \Omega \to \bar{\R}$. Then, \textbf{$f_n$ converges to $f$ uniformly almost everywhere} if there exists some $E \in \F$ such that $\mu(E^c) = 0$ and $f_n \to f$ uniformly on $E$.
 \end{definition}
 
+\begin{definition}
+    Let $f: \Omega \to \bar{\R}$ be a function and suppose there exists some $a > 0$ such that $\mu \{ x: |f(x)| > a \} = 0$. We define the \textbf{essential supremum} of $f$ by
+    $$ \textup{ess sup } |f| = \inf \{ a > 0 : \mu \{ x:|f(x)| > a \} = 0\}. $$
+\end{definition}
+
+Clearly, if $\mu \{x: |f(x)| > a \} = 0$ and $b > a$ then $\mu \{ x:|f(x)| > b \} = 0$. Also, $ \text{ess sup} |f| \leq \sup |f|$.
