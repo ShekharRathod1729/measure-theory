@@ -66,8 +66,74 @@ We recall the definition of \emph{uniform convergence}:
 \end{definition}
 
 \begin{definition}
-    Let $f: \Omega \to \bar{\R}$ be a function and suppose there exists some $a > 0$ such that $\mu \{ x: |f(x)| > a \} = 0$. We define the \textbf{essential supremum} of $f$ by
-    $$ \textup{ess sup } |f| = \inf \{ a > 0 : \mu \{ x:|f(x)| > a \} = 0\}. $$
+    Let $f: \Omega \to \bar{\R}$ be a function and suppose there exists some $a > 0$ such that $\mu \{ x: |f(x)| > a \} = 0$. We say that $f$ is \textbf{essentially bounded} and define the \textbf{essential supremum} of $f$ by
+    $$ \textup{ess sup } |f| = \inf \{ a > 0 : \mu \{ x:|f(x)| > a \} = 0\}. $$ 
 \end{definition}
 
-Clearly, if $\mu \{x: |f(x)| > a \} = 0$ and $b > a$ then $\mu \{ x:|f(x)| > b \} = 0$. Also, $ \text{ess sup} |f| \leq \sup |f|$.
+Clearly, $\essup |f| \leq \sup |f|$.
+
+\begin{example}
+    Consider the following function:
+    $$ f(x) = 
+    \begin{cases}
+    1, & \text{if } x \neq 0, \\
+    2, & \text{if } x = 0.    
+    \end{cases} $$
+    Then, $\essup |f| = 1$ while $\sup |f| = 2$.
+\end{example}
+
+\begin{proposition}
+    If $\essup |f| = c$, then $\mu \{ x : |f(x)| > c \} = 0$.
+\end{proposition}
+
+\begin{proof}
+    Since $c = \essup |f|$, we have $c = \inf \{ a > 0 : \mu \{ x:|f(x)| > a \} = 0\}$, and so for any $d > c$, $\mu \{ x:|f(x)| > d \} = 0$. Hence, for all $n \in \N$, $\mu \left\{ x:|f(x)| > c + \frac{1}{n} \right\} = 0$. Therefore, 
+    $$\mu \left( \bigcup_{n \geq 1}\left\{ x:|f(x)| > c + \frac{1}{n} \right\}\right) = 0,$$ 
+    that is, $\mu \{ x : |f(x)| > c \} = 0$.
+\end{proof}
+
+\begin{proposition}
+    The essential supremum is a class property: if $f \sim g$, then $ \essup |f| = \essup |g|$.
+\end{proposition}
+
+\begin{proof}
+    Let $c = \essup |f|$ and $A = \{ x : |g(x)| > c \}$. Since $f \sim g$, there exists some $E \in \F$ such that $\mu(E^c) = 0$ and $f(x) = g(x)$ for all $x \in E$.
+
+    \textcolor{red}{Now, $ A = (A \cap E) \cup (A \cap E^c) $ and so $\mu(A) = \mu(A \cap E) + \mu(A \cap E^c)$.} But $A \cap E^c \sub E$ and since $\mu(E^c) = 0$, $\mu(A \cap E^c) = 0$ and so $\mu(A) = \mu(A \cap E)$.
+
+    Also, $A \cap E = \{ x \in E : |g(x)| > c \} = \{ x : |f(x)| > c \}$ since $f = g$ on $E$. Hence, $\mu(A \cap E) = \mu \{ x : |f(x)| > c \} = 0$ by Proposition 17.10, and so $\mu(A) = 0$, i.e., $\mu\{ x : |g(x)| > c \} = 0$. Therefore, $\essup |g| \leq c = \essup |f|$. 
+    
+    It can be similarly shown that $\essup |f| \leq \essup |g|$ and so $\essup |f| = \essup |g|$.
+\end{proof}
+
+Let $\LI$ be the subset of $\mathscr{M}$ containing all the essentially bounded functions in $\mathscr{M}$. 
+
+\begin{lemma}
+    Let $[f], [g]$ be equivalence classes in $\LI$. Define $d([f], [g]) := \essup |f - g|$. Then, $d$ is a metric on $\mathscr{M}$.
+\end{lemma}
+
+\begin{proof}
+    Clearly, $d([f], [g]) \geq 0$ and $d([f], [g]) = d([g], [f])$. 
+
+    \textbf{We first show:} if $d([f], [g]) = 0$, then $[f] = [g]$, i.e., $f \sim g$. Define $h := f - g$. Since $d([f], [g]) = 0$, $ \essup |h| = 0$. Hence, for all $n \in \N$, 
+
+    $$ \mu \left\{ x : |h(x)| > \frac{1}{n} \right\} = 0 ,$$
+    and so
+    $$ \mu \left( \bigcup_{n \geq 1} \left\{ x : |h(x)| > \frac{1}{n} \right\} \right) = 0,$$
+    that is, 
+    $$ \mu \left\{ x : |h(x)| > 0 \right\} = 0. $$
+    Therefore, $|h(x)| = 0$ a.e., and so $|f(x) - g(x)| = 0$ a.e., implying that $f(x) = g(x)$ a.e., or that $f \sim g$. 
+
+    \textbf{We now show that $d([f], [h]) \leq d([f], [g]) + d([g], [h])$.} Let $d_1 := d([f], [g])$ and $d_2 := d([g], [h])$. We want to show that $\essup |f - h| \leq d_1 + d_2$. 
+    
+    \textcolor{red}{Consider the set $A = \{ x: |f(x) - h(x)| > d_1 + d_2 \}$.} For all $x \in A$, 
+
+    $$ d_1 + d_2 < |f(x) - h(x)| \leq |f(x) - g(x)| + |g(x) - h(x)| $$
+    which is only possible if either $d_1 < |f(x) - g(x)|$ or $d_2 < |g(x) - h(x)|$ or both (for if $|f(x) - g(x)| \leq d_1$ and $|g(x) - h(x)| \leq d_2$ then $|f(x) - g(x)| + |g(x) - h(x)| \leq d_1 + d_2$). Hence, $A = \{ x : |f(x) - g(x)| > d_1 \} \cup \{ x : |g(x) - h(x)| > d_2 \}$. Then, 
+    $$\mu(A) \leq \mu\{ x : |f(x) - g(x)| > d_1 \} + \mu\{ x : |g(x) - h(x)| > d_2 \} = 0$$
+    for $d_1 = \essup |f - g|$ and $d_2 = \essup |g - h|$. Therefore, $\mu\{ x: |f(x) - h(x)| > d_1 + d_2 \} = 0$, and so $\essup |f - h| \leq d_1 + d_2$, as desired.
+\end{proof}
+
+\begin{theorem}
+    $f_n \to f$ uniformly almost everywhere if and only if $d(f_n, f) \to 0$. 
+\end{theorem}
