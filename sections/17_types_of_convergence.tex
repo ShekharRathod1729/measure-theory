@@ -58,7 +58,7 @@ We recall the definition of \emph{uniform convergence}:
 
 \begin{definition}
     Let $f, f_n: E \to \bar{\R}$. We say that \textbf{$f_n$ converges to $f$ uniformly} if $\forall \epsilon > 0$, there exists $n_0 \in \mathbb{N}$ such that for all $n \geq n_0$, $|f_n(x) - f(x)| < \epsilon$ for all $x \in E$; or, equivalently, for all $n \geq n_0$, 
-    $$ \sup_{x \in E} |f_n(x) - f(x)| < \epsilon \quad \forall x \in E .$$
+    $$ \sup_{x \in E} |f_n(x) - f(x)| < \epsilon.$$
 \end{definition}
 
 \begin{definition}
@@ -135,5 +135,82 @@ Let $\LI$ be the subset of $\mathscr{M}$ containing all the essentially bounded 
 \end{proof}
 
 \begin{theorem}
-    $f_n \to f$ uniformly almost everywhere if and only if $d(f_n, f) \to 0$. 
+    $f_n \to f$ uniformly almost everywhere if and only if $d([f_n], [f]) \to 0$. 
 \end{theorem}
+
+\begin{proof}
+    Suppose $f_n \to f$ uniformly a.e. Then, $f_n \to f$ uniformly on some $E \in \F$ with $\mu(E^c) = 0$. Let $\epsilon > 0$ and $\delta = \epsilon / 2$. There exists some $N \in \N$ such that, for all $n \geq N$, 
+    $$ \sup_{x \in E} |f_n(x) - f(x)| < \delta. $$
+    \textcolor{red}{Observe that, for $n \geq N$, $ \{ x : |f_n(x) - f(x)| \geq \delta \} \sub E^c$.} Hence, $\mu \{ x : |f_n(x) - f(x)| \geq \delta \} = 0$, and so, $\essup |f_n - f| \leq \delta$, i.e., $d([f_n], [f]) \leq \delta < \epsilon$, for all $n \geq N$. Thus, $d([f_n], [f]) \to 0$.
+
+    We now show the reverse direction: let $d([f_n], [f]) \to 0$, i.e., $\essup |f_n - f| \to 0$. Then, for every $\epsilon > 0$, there exists some $N \in \N$ such that for all $n \geq N$, $\essup |f_n - f| < \epsilon$, i.e., $\mu \{ x : |f_n - f| \geq \epsilon \} = 0$. Therefore, for every $k \in \N$, there exists some $N_k \in \N$ with 
+    $$ \mu \left \{ x : |f_n(x) - f(x)| \geq \frac{1}{2^k} \right \} = 0 $$
+    for all $n \geq N_k$, and so
+    $$ \mu \left( \bigcup_{n \geq N_k} \left \{ x : |f_n(x) - f(x)| \geq \frac{1}{2^k} \right \} \right) = 0 .$$
+    Since this is true for every $k \geq 1$, 
+    $$ \mu \left( \bigcup_{k \geq 1} \bigcup_{n \geq N_k} \left \{ x : |f_n(x) - f(x)| \geq \frac{1}{2^k} \right \} \right) = 0 .$$
+    \textcolor{red}{Define $E^c := \bigcup_{k \geq 1} \bigcup_{n \geq N_k} \left \{ x : |f_n(x) - f(x)| \geq \frac{1}{2^k} \right \}$.} Then, $E = \bigcap_{k \geq 1} \bigcap_{n \geq N_k} \left \{ x : |f_n(x) - f(x)| < \frac{1}{2^k} \right \}$. We now show that $f_n \to f$ uniformly a.e. on $E$. 
+
+    Let $\epsilon > 0$. Consider $k_0$ such that $\frac{1}{2^{k_0}} < \epsilon$. For all $n \geq N_{k_0}$ and for all $x \in E$, we have $|f_n(x) - f(x)| < \frac{1}{2^{k_0}} < \epsilon$. Equivalently, for all $n \geq N_{k_0}$, $\sup_{x \in E} |f_n(x) - f(x)| < \epsilon$, and since $\mu(E^c) = 0$, $f_n \to f$ uniformly a.e.
+
+\end{proof}
+
+\begin{example}
+    Consider the measure space $([0,1], \L, \lambda)$, where $\L$ is the Lebesgue $\sigma$-algebra on $[0,1]$ and $\lambda$ is the Lebesgue measure. Let $f_n(x) = x^n$ and $f = 0$. Then, $f_n \to f$ a.e. but $f_n$ does not converge to $f$ uniformly almost everywhere. To see why this is the case, suppose $f_n \to f$ uniformly a.e. Then, there exists $E \in \L$ such that $\lambda(E^c) = 0$ and $f_n \to f$ uniformly on $E$. Let $0 < \epsilon < 1$. There exists some $N \in \N$ such that, for all $n \geq N$, 
+    $$ \sup_{x \in E} |f_n(x) - f(x)| < \epsilon, $$
+    i.e., 
+    $$ \sup_{x \in E} x^n < \epsilon.$$
+    Since this is true for all $n \geq N$, this is true for $N$, and so $\sup_{x \in E} x^N < \epsilon$. But observe that $x^N \geq \epsilon$ for all $x \geq \epsilon^{1/N}$. Hence, if $x \geq \epsilon^{1/N}$, then $x \in E^c$. That is, $\{ x : x \geq \epsilon^{1/N} \} \sub E^c$. But $\lambda \{ x : x \geq \epsilon^{1/N} \} = 1 - \epsilon^{1/N} > 0$ while $\lambda(E^c) = 0$, which is a contradiction. 
+\end{example}
+
+\subsection{Almost uniform convergence}
+
+\begin{definition}
+    Let $f_n, f : \Omega \to \bar{\R}$. We say that $f_n$ converges to $f$ \textbf{almost uniformly} if for every $\epsilon > 0$, there exists $E_\epsilon \in \F$ such that $\mu(E_\epsilon^c) < \epsilon$ and $f_n \to f$ uniformly on $E_\epsilon$.
+\end{definition}
+
+\begin{example}
+    Consider once again the function $f_n(x) = x^n$ and $f = 0$ on $[0, 1]$. For any $\epsilon \in (0, 1)$, define $E_\epsilon := [0, 1 - \epsilon)$. Then, $E_\epsilon^c = [1 - \epsilon, 1]$ and so $\lambda(E^c) = \epsilon$. Also, $\sup_{x \in E_\epsilon} |x^n - 0| < (1 - \epsilon)^n \to 0$ and so $f_n \to f$ uniformly on $E_\epsilon$. Thus, $f_n \to f$ almost uniformly.
+\end{example}
+
+\begin{remark}
+    Almost-everywhere uniform convergence is the strongest: almost-everywhere uniform convergence implies almost-everywhere convergence and almost uniform convergence. 
+\end{remark}
+
+We now show that almost uniform convergence implies almost-everywhere convergence.
+
+\begin{lemma}
+    If $f_n \to f$ almost uniformly, then $f_n \to f$ a.e.
+\end{lemma}
+
+\begin{proof}
+    Since $f_n \to f$ almost uniformly, for all $k \geq 1$, there exists some $E_k \in \F$ such that $f_n \to f$ uniformly on $E_k$ and $\mu(E_k^c) < 1/k$. \textcolor{red}{Define $E = \bigcup_{k \geq 1} E_k$.} Then, $E^c = \bigcap_{k \geq 1} E_k^c \sub E_{k_0}^c$ for all $k_0 \in \N$ and so $\mu(E^c) \leq \mu(E_{k_0}^c) < 1/k_0$ for all $k_0 \in \N$, i.e., $\mu(E^c) = 0$. Also, for any $x \in E$, we have $x \in E_k$ for some $k \geq 1$, and since $f_n \to f$ uniformly on $E_k$, $f_n(x) \to f(x)$. Hence, for all $x \in E$, $f_n \to f$ and $\mu(E^c) = 0$, i.e., $f_n \to f$ a.e.
+\end{proof}
+
+\begin{theorem}
+    (\textbf{Egorov's theorem}.) Let $\mu(\Omega) < \infty$. Then, if $f_n \to f$ a.e., then $f_n \to f$ almost uniformly. 
+\end{theorem}
+
+\begin{proof}
+    \textcolor{red}{Observe that since $f_n \to f$ a.e., the set $E$ on which $f_n \to f$ is given by:
+    $$ E = \bigcap_{k \geq 1}\bigcup_{n \geq 1}\bigcap_{l \geq n} \left\{x : |f_l(x) - f(x)| < \frac{1}{k} \right\},$$
+    where $\mu(E^c) = 0$.} Hence,
+    $$ \mu \left( \bigcup_{k \geq 1}\bigcap_{n \geq 1}\bigcup_{l \geq n} \left\{x : |f_l(x) - f(x)| \geq \frac{1}{k} \right\} \right) = 0 .$$
+    Then, for all $k \geq 1$, 
+    $$ \mu \left( \bigcap_{n \geq 1}\bigcup_{l \geq n} \left\{x : |f_l(x) - f(x)| \geq \frac{1}{k} \right\} \right) = 0 .$$
+    Fix $k$ and define $A_n = \bigcup_{l \geq n} \left\{x : |f_l(x) - f(x)| \geq \frac{1}{k} \right\}$. Clearly, $A_{n + 1} \sub A_n$ and so let $A_n \downarrow \bigcap_{m \geq 1} A_m$. Since $\mu(\Omega) < \infty$, we use continuity from above:
+    $$ \mu(A_n) \downarrow \mu\left( \bigcap_{m \geq 1} A_m \right) = 0 $$
+    and so, for every $k \geq 1$,  
+    $$ \lim_{n \to \infty} \mu \left( \bigcup_{l \geq n} \left\{x : |f_l(x) - f(x)| \geq \frac{1}{k} \right\} \right) = 0.$$
+    Let $\epsilon > 0$. For a fixed $k$, there exists $n_{\epsilon, k}$ such that for all $n \geq n_{\epsilon, k}$, 
+    $$ \mu \left( \bigcup_{l \geq n_{\epsilon, k}} \left\{x : |f_l(x) - f(x)| \geq \frac{1}{k} \right\} \right) < \frac{\epsilon}{2^k}.$$
+    Hence, 
+    \begin{align*}
+    \mu \left( \bigcup_{k \geq 1}\bigcup_{l \geq n_{\epsilon, k}} \left\{x : |f_l(x) - f(x)| \geq \frac{1}{k} \right\} \right) 
+    &\leq \sum_{k \geq 1} \mu \left( \bigcup_{l \geq n_{\epsilon, k}} \left\{x : |f_l(x) - f(x)| \geq \frac{1}{k} \right\} \right) \\
+    &< \sum_{k \geq 1} \frac{\epsilon}{2^k} = \epsilon. 
+    \end{align*}
+    Define $E_\epsilon := \bigcap_{k \geq 1}\bigcap_{l \geq n_{\epsilon, k}} \left\{x : |f_l(x) - f(x)| < \frac{1}{k} \right\}$. We just showed that $\mu(E_\epsilon^c) < \epsilon$. We now show that $f_n \to f$ uniformly on $E_\epsilon$. 
+    
+    For any $\delta > 0$, take $k_0 \in \N$ with $\frac{1}{k_0} < \delta$. For all $l \geq n_{\epsilon, k_0}$, we have $|f_l(x) - f(x)| < 1/k_0 < \delta$ for all $x \in E_\epsilon$. Hence, $f_n \to f$ uniformly on $E_\epsilon$. Thus we have shown that $f_n \to f$ almost uniformly. 
+\end{proof}
