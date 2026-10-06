@@ -99,7 +99,7 @@ Clearly, $\essup |f| \leq \sup |f|$.
 \begin{proof}
     Let $c = \essup |f|$ and $A = \{ x : |g(x)| > c \}$. Since $f \sim g$, there exists some $E \in \F$ such that $\mu(E^c) = 0$ and $f(x) = g(x)$ for all $x \in E$.
 
-    \textcolor{red}{Now, $ A = (A \cap E) \cup (A \cap E^c) $ and so $\mu(A) = \mu(A \cap E) + \mu(A \cap E^c)$.} But $A \cap E^c \sub E$ and since $\mu(E^c) = 0$, $\mu(A \cap E^c) = 0$ and so $\mu(A) = \mu(A \cap E)$.
+    \textcolor{red}{Now, $ A = (A \cap E) \cup (A \cap E^c) $ and so $\mu(A) = \mu(A \cap E) + \mu(A \cap E^c)$.} But $A \cap E^c \sub E^c$ and since $\mu(E^c) = 0$, $\mu(A \cap E^c) = 0$ and so $\mu(A) = \mu(A \cap E)$.
 
     Also, $A \cap E = \{ x \in E : |g(x)| > c \} = \{ x : |f(x)| > c \}$ since $f = g$ on $E$. Hence, $\mu(A \cap E) = \mu \{ x : |f(x)| > c \} = 0$ by Proposition 17.10, and so $\mu(A) = 0$, i.e., $\mu\{ x : |g(x)| > c \} = 0$. Therefore, $\essup |g| \leq c = \essup |f|$. 
     
@@ -109,7 +109,7 @@ Clearly, $\essup |f| \leq \sup |f|$.
 Let $\LI$ be the subset of $\mathscr{M}$ containing all the essentially bounded functions in $\mathscr{M}$. 
 
 \begin{lemma}
-    Let $[f], [g]$ be equivalence classes in $\LI$. Define $d([f], [g]) := \essup |f - g|$. Then, $d$ is a metric on $\mathscr{M}$.
+    Let $[f], [g]$ be equivalence classes in $\LI$. Define $d([f], [g]) := \essup |f - g|$. Then, $d$ is a metric on $\LI$.
 \end{lemma}
 
 \begin{proof}
@@ -129,7 +129,7 @@ Let $\LI$ be the subset of $\mathscr{M}$ containing all the essentially bounded 
     \textcolor{red}{Consider the set $A = \{ x: |f(x) - h(x)| > d_1 + d_2 \}$.} For all $x \in A$, 
 
     $$ d_1 + d_2 < |f(x) - h(x)| \leq |f(x) - g(x)| + |g(x) - h(x)| $$
-    which is only possible if either $d_1 < |f(x) - g(x)|$ or $d_2 < |g(x) - h(x)|$ or both (for if $|f(x) - g(x)| \leq d_1$ and $|g(x) - h(x)| \leq d_2$ then $|f(x) - g(x)| + |g(x) - h(x)| \leq d_1 + d_2$). Hence, $A = \{ x : |f(x) - g(x)| > d_1 \} \cup \{ x : |g(x) - h(x)| > d_2 \}$. Then, 
+    which is only possible if either $d_1 < |f(x) - g(x)|$ or $d_2 < |g(x) - h(x)|$ or both (for if $|f(x) - g(x)| \leq d_1$ and $|g(x) - h(x)| \leq d_2$ then $|f(x) - g(x)| + |g(x) - h(x)| \leq d_1 + d_2$). Hence, $A \sub \{ x : |f(x) - g(x)| > d_1 \} \cup \{ x : |g(x) - h(x)| > d_2 \}$. Then, 
     $$\mu(A) \leq \mu\{ x : |f(x) - g(x)| > d_1 \} + \mu\{ x : |g(x) - h(x)| > d_2 \} = 0$$
     for $d_1 = \essup |f - g|$ and $d_2 = \essup |g - h|$. Therefore, $\mu\{ x: |f(x) - h(x)| > d_1 + d_2 \} = 0$, and so $\essup |f - h| \leq d_1 + d_2$, as desired.
 \end{proof}
