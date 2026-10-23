@@ -142,5 +142,23 @@ Countable additivity implies \textbf{finite additivity}: If $E_1,...,E_n$ is a s
 \end{proof}
 
 \begin{theorem}
-  
+  Let $\Sa$ be a semi-algebra on $\Omega$ and $\mu : \Sa \to [0, +\infty]$ be $\sigma$-additive. Then, the extension $\nu$ of $\mu$ to $\A(\Sa)$, as defined in Theorem 3.6, is also $\sigma$-additive.
 \end{theorem}
+
+\begin{proof}
+  Let $A = \bigsqcup_{j \geq 1} A_j$, where $A_j \in \A(\Sa)$ for all $j \geq 1$ and $A \in \A(\Sa)$. We want to show that $\nu(\bigsqcup_{j \geq 1} A_j) = \sum_{j \geq 1} \nu(A_j)$.
+
+  Since $A_j \in \A(\Sa)$, by Lemma 2.8, $A_j = \bigsqcup_{l = 1}^{m_j} E_{j, l}$ for some $E_{j, l} \in \Sa$, $l = 1,..., m_j$. Similarly, $A = \bigsqcup_{k = 1}^n E_k$ for some $E_k \in \Sa$. By definition of $\nu$, 
+  \[ \nu(A) = \sum_{k = 1}^n \mu(E_k). \tag{*} \]
+  \textcolor{red}{Now, $E_k \sub A$ and so $E_k = E_k \cap A = E_k \cap \left( \bigsqcup_{j \geq 1} A_j \right) = E_k \cap \left( \bigsqcup_{j \geq 1} \bigsqcup_{l = 1}^{m_j} E_{j, l} \right)$. Hence, $E_k = \bigsqcup_{j \geq 1} \bigsqcup_{l = 1}^{m_j} E_k \cap E_{j, l} $.} Since $E_k$ and $E_{j, l}$ are in $\Sa$, their intersection is also in $\Sa$ and so we can apply the $\sigma$-additivity of $\mu$ here:
+  \[ \mu(E_k) = \sum_{j \geq 1} \sum_{l = 1}^{m_j} \mu(E_k \cap E_{j, l}). \]
+  Using this in (*), we get
+  \[ \nu(A) = \sum_{k = 1}^n \sum_{j \geq 1} \sum_{l = 1}^{m_j} \mu(E_k \cap E_{j, l}).\]
+  Rearranging the terms gives
+  \[ \nu(A) = \sum_{j \geq 1} \sum_{l = 1}^{m_j} \sum_{k = 1}^{n} \mu(E_{j, l} \cap E_k). \tag{**}\]
+  \textcolor{red}{Further, since $E_{j, l} \sub A_j \sub A$, $E_{j, l} = E_{j, l} \cap A = \bigsqcup_{k = 1}^n (E_{j, l} \cap E_k)$.} Therefore,
+  \[ \mu(E_{j, l}) = \sum_{k = 1}^n \mu(E_{j, l} \cap E_k). \]
+  Substituting this in (**) gives
+  \[ \nu(A) = \sum_{j \geq 1} \sum_{l = 1}^{m_j} \mu(E_{j, l}) = \sum_{j \geq 1} \nu(A_j)\]
+  as desired.
+\end{proof}
